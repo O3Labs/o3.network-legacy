@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>O3 — QR Code Generator</title>
+    <meta name="description" content="This is Finance 2.0 — Interacting with the blockchain has never been this simple. O3 is a gateway that provides access to the NEO blockchain. You will be able to manage your digital assets in a simple and secure way directly from your mobile device.">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <meta property="og:image" content="https://o3.network/img/opengraph.jpg"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/icon/favicon-16x16.png">
+    <link rel="manifest" href="../img/icon/manifest.json">
+    <link rel="mask-icon" href="../img/icon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <link href='../css/fonts.css' rel='stylesheet' type='text/css'>
+    <link href="../css/paper-kit.css?v=2.1.0" rel="stylesheet"/>
+    <script src="js/vue.min.js"></script>
+    <style type="text/css">
+</style>
+</head>
+<body >
+    <div class="wrapper" id="app">
+        <div class="">
+            <div class="container">
+                <div class="row mt-4">
+                    <div class="col-md-4 col-sm-12 mx-auto">
+                        <div class="form-group">
+                            <h6>NEO Address <span class="icon-danger">*</span></h6>
+                            <input type="text" class="form-control border-input" placeholder="enter valid NEO Address here." v-model="neo.address">
+                        </div>
+
+                        <div id="qrcode" style="display: none;"></div>
+                        <div id="canvasContainer"></div>
+                        <br/>
+                        <a class="btn btn-warning btn" style="width: 100%;" v-on:click="downloadQR($event)">Download QR Code</a>
+                        <br/><br/>
+                        <small><a href="https://o3.network">Powered by o3.network</a></small>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/qrcode.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+      if (w < 2 * r) r = w / 2;
+      if (h < 2 * r) r = h / 2;
+      this.beginPath();
+      this.moveTo(x+r, y);
+      this.arcTo(x+w, y, x+w, y+h, r);
+      this.arcTo(x+w, y+h, x, y+h, r);
+      this.arcTo(x, y+h, x, y, r);
+      this.arcTo(x, y, x+w, y, r);
+      this.closePath();
+      return this;
+  }
+  var app = new Vue({
+      el: '#app',
+      data: {
+        generatedURI:"",
+        neo:{
+            address:"AKcm7eABuW1Pjb5HsTwiq7iARSatim9tQ6"
+        },
+    },
+    watch: {
+        neo: {
+            handler(val){
+                this.constructURI();    
+            },
+            deep:true,
+        }
+    },
+    methods: {
+        downloadQR(e){
+            console.log(e);
+            e.target.href = document.getElementById("qrcanvas-o3").toDataURL();
+            e.target.download = this.neo.address;
+        },
+        drawQRCanvas(address){
+            var cWidth = 480;
+            var cHeight = 640;
+            var margin = 40;
+
+            var container = document.getElementById('canvasContainer');
+            container.innerHTML ="";
+            var canvas = document.createElement("canvas");
+            canvas.id = "qrcanvas-o3";
+            canvas.width = cWidth;
+            canvas.height = cHeight;
+            canvas.style = "box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15);border-radius:6px"
+            canvas.style.width ='100%';
+            canvas.style.height='100%';
+            context = canvas.getContext('2d')
+            //draw rect 3:4
+            context.roundRect(0, 0, cWidth, cHeight,6);
+            context.fillStyle = 'white';
+            context.fill();
+            var qrImage = document.getElementById('qrcode').querySelector("img");
+            var qrWidth = 400;
+            var qrHeight = 400;
+            var neoLogo = new Image();
+            neoLogo.onload = function() {
+                //draw qr image on white canvase
+                context.drawImage(qrImage,margin,margin);
+                //draw white rect on qr to fill NEO logo
+                context.roundRect(((qrWidth - 120)/2) + margin, ((qrHeight - 120)/2) + margin, 120, 120,6);
+                context.fillStyle = 'white';
+                context.fill();
+                //draw NEO logo
+                context.drawImage(neoLogo, ((qrWidth - 80)/2) + margin, ((qrHeight - 80)/2) + margin,80,80);
+            }
+            neoLogo.src = "img/neo.svg";
+
+            var o3Logo = new Image();
+            o3Logo.src = "img/o3-logo.svg"
+            o3Logo.onload = function() {
+                 //draw o3 logo
+                 context.drawImage(o3Logo, margin, cHeight - margin - 40 ,40,40);
+                 //draw text of the address
+                 context.font = '19px Avenir-Heavy';
+                 context.textBaseline = 'top';
+                 context.fillStyle = 'black';
+                 context.fillText(address,margin,margin + qrHeight + (margin/2));                 
+             }
+
+             context.font = '13px Avenir';
+             context.textBaseline = 'bottom';
+             context.fillStyle = '#9B9B9B';
+             context.fillText("Powered by",cWidth - margin - 110,cHeight - margin - 20);
+             context.font = '20px Avenir-heavy';
+             context.textBaseline = 'bottom';
+             context.fillStyle = '#0069D9';
+             context.fillText("o3.network",cWidth - margin - 110,cHeight - margin + 4);
+             container.appendChild(canvas);
+         },
+         generateQR(text) {
+            var qrSpan = document.getElementById("qrcode");
+            qrSpan.innerHTML ="";
+            var qrcode = new QRCode("qrcode", {
+                text: text,
+                width: 400,
+                height: 400,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            }); 
+            this.drawQRCanvas(text);
+        },
+        constructURI(){
+            this.generateQR(this.neo.address);
+        },
+    },
+    mounted() {
+        if(window.location.hash) {
+            this.neo.address = window.location.hash.replace("#","");
+        }
+        this.constructURI();
+    }
+})
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112635659-1"></script><script>window.dataLayer=window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'UA-112635659-1');</script>
+</html>

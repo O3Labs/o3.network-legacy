@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>O3</title>
+    <meta name="description" content="This is Finance 2.0 — Interacting with the blockchain has never been this simple. O3 is a gateway that provides access to the NEO blockchain. You will be able to manage your digital assets in a simple and secure way directly from your mobile device.">
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <meta property="og:image" content="https://o3.network/img/opengraph.jpg"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="img/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/icon/favicon-16x16.png">
+    <link rel="manifest" href="img/icon/manifest.json">
+    <link rel="mask-icon" href="img/icon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/paper-kit.css?v=2.1.0" rel="stylesheet"/>
+
+    <link href='css/fonts.css' rel='stylesheet' type='text/css'>
+    <link href="css/nucleo-icons.css" rel="stylesheet">
+    <link href="css/animations.css" rel="stylesheet">
+    <!-- <link href="css/demo.css" rel="stylesheet"> -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <script type="text/javascript" src="js/particles.js"></script> -->
+    <style type="text/css">
+
+    .section-cards {
+      padding: 50px 0;
+      min-height: 790px;
+  }
+  .section-cards .codrops-header {
+      margin-left: 10%;
+      margin-top: 7%;
+  }
+  .section-cards .image-container {
+      max-width: 1040px;
+      margin-top: -140px;
+      position: relative;
+      height: 660px;
+  }
+  .section-cards .image-container img {
+      max-width: 1040px;
+      width: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1;
+  }
+  .section-cards .title {
+      margin-bottom: 5px;
+      margin-top: 5px;
+  }
+  .section-cards .description {
+      margin-top: 35px;
+      max-width: 270px;
+  }
+
+
+  .pseudo-scroller {
+      pointer-events: none;
+  }
+
+  .isolayer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+      z-index: 99999;
+  }
+
+  .js .grid,
+  .js .grid__item,
+  .js .grid__link {
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+  }
+
+  .grid {
+      position: relative;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+  }
+
+  .grid__item {
+      width: 300px;
+  }
+
+  .js .grid__item {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+  }
+
+  .grid__link {
+      position: relative;
+      z-index: 1;
+      display: block;
+  }
+
+  .grid__img {
+      display: block;
+      max-width: 100%;
+  }
+
+  .grid__title {
+      font-size: 0.65em;
+      font-weight: 600;
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0;
+      color: #fff;
+      -webkit-transform: translate3d(0, -20px, 0);
+      transform: translate3d(0, -20px, 0);
+      -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+      transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .grid__item:hover .grid__title {
+      opacity: 1;
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+  }
+
+  .layer {
+      position: relative;
+      display: block;
+  }
+
+  .layer:not(:first-child) {
+      position: absolute;
+      top: 0;
+      left: 0;
+  }
+
+  /* Shadow effect */
+  .isolayer--shadow .grid__link::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 5px;
+      right: 5px;
+      bottom: 5px;
+      left: 5px;
+      opacity: 0.6;
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.8);
+      -webkit-transform: translateZ(-1px) scale(0.95);
+      transform: translateZ(-1px) scale(0.95);
+      -webkit-transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+  }
+
+  .isolayer--shadow .grid__item:hover .grid__link::before {
+      opacity: 0.2;
+      box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.8);
+      -webkit-transform: translateZ(-1px) scale(1);
+      transform: translateZ(-1px) scale(1);
+  }
+
+  /* All individual isometric grid layouts (static and scrollable) */
+  .isolayer--scroll1 {
+      width: 70vw;
+      max-width: 1200px;
+      height: calc(100vh - 280px);
+  }
+
+  .isolayer--scroll1 .grid__item {
+      width: 300px;
+      padding: 15px;
+  }
+
+  .isolayer--deco1 {
+      width: 1200px;
+      height: 900px;
+  }
+
+  .isolayer--deco1 .grid__link div.layer {
+      width: 370px;
+      height: 270px;
+  }
+
+  .isolayer--deco1 .grid__item {
+      width: 400px;
+      height: 300px;
+      padding: 15px;
+  }
+
+  .isolayer--deco1 .grid__item:nth-child(2) {
+      margin-top: 210px;
+  }
+
+  .isolayer--deco2 {
+      width: 1200px;
+      height: 100vh;
+  }
+
+  .isolayer--deco2 .grid__item {
+      padding: 20px;
+  }
+
+  .isolayer--deco2 .grid__link .layer {
+      border: 20px solid #fff;
+      border-width: 40px 20px;
+      box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Loading effect */
+  .js .grid {
+      opacity: 0;
+      -webkit-transition: opacity 0.3s;
+      transition: opacity 0.3s;
+  }
+
+  .js .grid.grid--loaded {
+      opacity: 1;
+  }
+
+  @-webkit-keyframes rotateCircle {
+      to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes rotateCircle {
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+}
+.js body.grid-loaded::after {
+  opacity: 0;
+}
+
+.grid__item .grid__link .grid__img {
+  border-radius: 14px;
+}
+
+.first-card {
+  top: -5px !important;
+}
+
+.second-card {
+  top: 55px !important;
+  left: 0 !important;
+}
+
+.third-card {
+  top: 810px !important;
+}
+.third-card .grid__link:before {
+  width: 374px;
+}
+.third-card .grid__img {
+  width: 374px !important;
+}
+
+.fourth-card {
+  top: 590px !important;
+}
+.fourth-card .grid__img {
+  width: 370px !important;
+  border-radius: 12px;
+}
+
+.fifth-card {
+  top: 360px !important;
+  left: 400px !important;
+}
+.fifth-card .grid__img {
+  width: 400px !important;
+}
+
+.sixth-card {
+  top: 950px !important;
+}
+
+.seventh-card {
+  top: 1110px !important;
+}
+.seventh-card .grid__img {
+  width: 375px !important;
+  border-radius: 12px;
+}
+
+.eight-card {
+  top: -125px !important;
+  left: 400px !important;
+}
+.eight-card .grid__img {
+  width: 400px !important;
+}
+
+.ninth-card {
+  top: 500px !important;
+  left: 800px !important;
+}
+.ninth-card .grid__link:before {
+  width: 374px;
+}
+.ninth-card .grid__img {
+  width: 374px !important;
+}
+.tenth-card {
+  top: 145px !important;
+  left: 800px !important;
+}
+
+.isolayer {
+  transform: translateX(34vw) translateY(-330px) rotateX(50deg) rotateZ(30deg) !important;
+  z-index: 1;
+}
+
+
+.presentation-page .animated {
+  transform: translate3D(0px, 0px, 0px) !important;
+  -webkit-transform: translate3D(0px, 0px, 0px) !important;
+  opacity: 1 !important;
+}
+
+.section-testimonials {
+  background-image: none;
+}
+
+.section-testimonials .card-profile .card-title,
+.section-testimonials .card-profile .card-description {
+  text-align: left !important;
+}
+.section-testimonials .card {
+  margin: 0 auto;
+  max-width: 460px;
+  padding-bottom: 30px;
+}
+.section-testimonials .card img {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+}
+.section-testimonials .fa-star {
+  font-size: 20px;
+  color: #fec42d;
+}
+.section-testimonials .card.card-testimonial .card-body {
+  margin-top: 0;
+  padding: 15px 50px;
+}
+.section-testimonials .page-carousel {
+  margin-top: 60px;
+}
+.section-testimonials .testimonials-people {
+  position: relative;
+}
+.section-testimonials .testimonials-people > img {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translate3D(0px, 50px, 0px);
+  -webkit-transform: translate3D(0px, 50px, 0px);
+  -webkit-transition: all 0.6s cubic-bezier(0.34, 2, 0.7, 1) 0s;
+  -moz-transition: all 0.6s cubic-bezier(0.34, 2, 0.7, 1) 0s;
+  -o-transition: all 0.6s cubic-bezier(0.34, 2, 0.7, 1) 0s;
+  -ms-transition: all 0.6s cubic-bezier(0.34, 2, 0.7, 1) 0s;
+  transition: all 0.6s cubic-bezier(0.34, 2, 0.7, 1) 0s;
+}
+.section-testimonials .testimonials-people .left-first-person {
+  left: 2%;
+  top: 2%;
+  height: 70px;
+  width: 70px;
+
+}
+.section-testimonials .testimonials-people .left-second-person {
+  left: 65%;
+  top: 100%;
+  height: 70px;
+  width: 70px;
+}
+.section-testimonials .testimonials-people .left-third-person {
+  left: -17%;
+  top: 135%;
+  height: 120px;
+  width: 120px;
+}
+.section-testimonials .testimonials-people .left-fourth-person {
+  left: 50%;
+  top: 190%;
+  height: 55px;
+  width: 55px;
+}
+.section-testimonials .testimonials-people .left-fifth-person {
+  left: 95%;
+  top: 220%;
+  height: 35px;
+  width: 35px;
+}
+.section-testimonials .testimonials-people .left-sixth-person {
+  left: 40%;
+  top: 265%;
+  height: 95px;
+  width: 95px;
+}
+.section-testimonials .testimonials-people .right-first-person {
+  right: -10%;
+  top: 0;
+  height: 60px;
+  width: 60px;
+}
+.section-testimonials .testimonials-people .right-second-person {
+  right: 30%;
+  top: 60%;
+  height: 70px;
+  width: 70px;
+}
+.section-testimonials .testimonials-people .right-third-person {
+  right: 95%;
+  top: 95%;
+  height: 50px;
+  width: 50px;
+}
+.section-testimonials .testimonials-people .right-fourth-person {
+  right: 45%;
+  top: 145%;
+  height: 50px;
+  width: 50px;
+}
+.section-testimonials .testimonials-people .right-fifth-person {
+  right: 90%;
+  top: 195%;
+  height: 100px;
+  width: 100px;
+}
+.section-testimonials .testimonials-people .right-sixth-person {
+  right: 15%;
+  top: 260%;
+  height: 70px;
+  width: 70px;
+}
+
+
+</style>
+</head>
+<body class="presentation-page loading">
+    <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="300">
+        <div class="container">
+         <a class="navbar-brand" href="#">O<sub><small>3</small></sub></a>
+
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="mailto:hello@o3.network">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <div class="page-header page-header-small" style="background-color: #0069d9">
+        <!-- <div class="filter"></div> -->
+        <div id="particles-js"></div>
+
+        <div class="content-center">
+            <div class="container">
+                <div class="motto">
+                    <h1 class="title"><img src="img/logo-white.png" srcset="img/logo-white@2x.png 2x" height="90px" /></h1>
+                    <h3 class="description">Your Mobile Gateway to the NEO Smart Economy</h3>
+                    <br />
+                    <a href="https://o3-neo-wallet.herokuapp.com/" target="_blank"><button class="btn btn-neutral">iOS via TestFlight</button></a>
+                    <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><button class="btn btn-link"><img src="img/playstore.png" height="60px" /></button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+
+    <div class="section section-cards section-gray">
+        <div class="codrops-header">
+            <div class="row">
+                <div class="col-md-6 col-lg-4">
+                    <div class="section-description">
+                        <h3 class="title">Take Control of Your Assets</h3>
+                        <h6 class="category">Claim, Send, Grow</h6>
+                        <h5 class="description">The blockchain revolution is building a more sustainable financial future.<br/>Be empowered by a cryptocurrency light wallet that puts you in charge.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section-intro ">
+            <div class="isolayer isolayer--deco1 isolayer--shadow ">
+                <ul class="grid">
+                    <li class="grid__item first-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/android-withdraw.jpg" alt="Android Withdraw" />
+                        </a>
+                    </li>
+                    <li class="grid__item second-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/android-port.jpg" alt="02" />
+                        </a>
+                    </li>
+                    <li class="grid__item third-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/ios-send.jpg" alt="Send Asset" />
+                        </a>
+                    </li>
+                    <li class="grid__item fourth-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/android-assets.jpg" alt="Account on Android" />
+                        </a>
+                    </li>
+                    <li class="grid__item fifth-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/ios-1.png" alt="iOS Account" />
+                        </a>
+                    </li>
+                    <li class="grid__item sixth-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/ios-touchid.jpg" alt="Security on iOS" />
+                        </a>
+                    </li>
+                    <li class="grid__item seventh-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/android-unclaimed-gas.gif" alt="unclaimed gas" />
+                        </a>
+                    </li>
+                    <li class="grid__item eight-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/ios-my-address.jpg" alt="My NEO Address" />
+                        </a>
+                    </li>
+                    <li class="grid__item ninth-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/ios-watch-address.jpg" alt="Watch only address" />
+                        </a>
+                    </li>
+                    <li class="grid__item tenth-card">
+                        <a class="grid__link">
+                            <img class="grid__img layer" src="img/cards/ios-transactions.jpg" alt="Transaction History" />
+                        </a>
+                    </li>
+                </ul>
+            </div> <!-- end isolayer -->
+        </section><!--/intro-->
+    </div> <!-- end section-cards -->
+
+    <div class="section section-features-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">This is Finance 2.0</h2>
+                    <h5 class="description">Interacting with the blockchain has never been this simple. O3 is a gateway that provides access to the NEO blockchain. You will be able to manage your digital assets in a simple and secure way directly from your mobile device.</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="info">
+                        <div class="icon icon-danger">
+                            <i class="nc-icon nc-touch-id"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Secure</h4>
+                            <p class="description">O3 takes advantage of both iOS and Android security to make sure only you can access private key.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info">
+                        <div class="icon icon-danger">
+                            <i class="nc-icon nc-chart-bar-32"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Real Time</h4>
+                            <p>Watch your portfolio grow side by side with the NEO Smart Economy.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info">
+                        <div class="icon icon-danger">
+                            <i class="nc-icon nc-world-2"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Informed</h4>
+                            <p>Get the latest NEO news, so that you are always up to date with the ecosystem.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info">
+                        <div class="icon icon-danger">
+                            <i class="nc-icon nc-ruler-pencil"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Open Source</h4>
+                            <p>O3 was born as a community effort and we promise to always support our users.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end section-features -->
+
+  
+    <div class="section section-team">
+        <div class="container">
+
+           <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2 class="title">Team</h2>
+            </div>
+        </div> <!-- end row -->
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-profile card-plain">
+                    <div class="card-avatar">
+                        <a href="#avatar"><img src="img/team/andrei.png" alt="..."></a>
+                    </div>
+                    <div class="card-body">
+                        <a>
+                            <div class="author">
+                                <h4 class="card-title">Andrei Terentiev</h4>
+                                <h6 class="card-category text-muted">Co-founder</h6>
+                            </div>
+                        </a>
+                        <p class="card-description text-center">
+                            Stanford University, Computer Science Student.<br/>
+                            Tokyo, Startup Engineer.<br/>
+                            Global, Open Source Developer.<br/>
+                            "Blockchain is love, Blockchain is life"
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card card-profile card-plain">
+                    <div class="card-avatar">
+                        <a href="#avatar"><img src="img/team/apisit.jpg" alt="..."></a>
+                    </div>
+                    <div class="card-body">
+                        <a>
+                            <div class="author">
+                                <h4 class="card-title">Apisit Toompakdee</h4>
+                                <h6 class="card-category text-muted">Co-founder</h6>
+                            </div>
+                        </a>
+                        <p class="card-description text-center">
+                            Software Engineer and System Architect.<br/>
+                            Backend, Mobile and Design.<br/>
+                            Believe in Financial inclusion.<br/>
+                            "Changing lives through technology"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- end container -->
+</div> <!-- end section team -->
+
+<div class="section section-partners">
+    <div class="container">
+        <div class="row">
+         <div class="col-12 text-center">
+            <h4 class="title">Sponsored by NEO Council</h4>
+            <button class="btn btn-link"><a href="https://neo.org/" target="_blank"><img src="img/NEO-smarg-economy-logo.svg" height="60px" /></a></button>
+        </div>
+    </div>
+</div>
+</div> <!-- section-partners -->
+
+</div> <!-- end wrapper -->
+<footer class="footer footer-black footer-big">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 text-center col-sm-3 col-12 ml-auto mr-auto">
+                <h4>O3 Labs Inc.</h4>
+            </div>
+            <div class="col-md-9 col-sm-9 col-12 ml-auto mr-auto">
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-6">
+                        <div class="links">
+                            <ul class="uppercase-links stacked-links">
+                                <li>
+                                    <a href="/">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://medium.com/proof-of-working" target="_blank">
+                                        Blog
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-6">
+                        <div class="links">
+                            <ul class="uppercase-links stacked-links">
+                                <li>
+                                    <a href="mailto:hello@o3.network?subject=contacts">
+                                     Contact Us
+                                 </a>
+                             </li>
+                             <li>
+                                <a href="mailto:hello@o3.network?subject=hiring">
+                                 We're Hiring
+                             </a>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="col-md-3 col-sm-3 col-6">
+                <a href="https://o3-neo-wallet.herokuapp.com/" target="_blank"><button class="btn btn-link btn-sm">iOS via TestFlight</button></a>
+                <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="img/playstore.png" width="155px" /></a>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row copyright ">
+
+            <div class="col text-left px-0">
+                © <script>document.write(new Date().getFullYear())</script> O3 Labs Inc.
+            </div>
+            <div class="col links px-0 text-right">
+                <ul>
+                    <li>
+                        <a href="/privacy">
+                            Terms
+                        </a>
+                    </li>
+                    |
+                    <li>
+                        <a href="/privacy">
+                            Privacy
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</footer>
+
+
+
+</body>
+
+<!-- Core JS Files -->
+<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui-1.12.1.custom.min.js" type="text/javascript"></script>
+<script src="js/popper.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/paper-kit.js?v=2.1.0"></script>
+
+<script type="text/javascript">
+
+if( $('body').hasClass('presentation-page') ){
+
+    $(function() {
+
+      var $window           = $(window),
+          isTouch           = Modernizr.touch;
+
+      if (isTouch) { $('.add-animation').addClass('animated'); }
+
+      $window.on('scroll', revealAnimation);
+
+      function revealAnimation() {
+
+        // Showed...
+        $(".add-animation:not(.animated)").each(function () {
+          var $this     = $(this),
+              offsetTop = $this.offset().top,
+              scrolled = $window.scrollTop(),
+              win_height_padded = $window.height();
+          if (scrolled + win_height_padded > offsetTop) {
+              $this.addClass('animated');
+          }
+        });
+        // Hidden...
+       $(".add-animation.animated").each(function (index) {
+          var $this     = $(this),
+              offsetTop = $this.offset().top;
+              scrolled = $window.scrollTop(),
+              win_height_padded = $window.height() * 0.8;
+          if (scrolled + win_height_padded < offsetTop) {
+            $(this).removeClass('animated')
+          }
+        });
+      }
+
+      revealAnimation();
+    });
+}
+    
+
+</script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+    (function() {
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        new IsoGrid(document.querySelector('.isolayer--deco1'), {
+            transform : 'translateX(33vw) translateY(-340px) rotateX(45deg) rotateZ(45deg)',
+            stackItemsAnimation : {
+                properties : function(pos) {
+                    return {
+                        translateZ: (pos+1) * 30,
+                        rotateZ: getRandomInt(-4, 4)
+                    };
+                },
+                options : function(pos, itemstotal) {
+                    return {
+                        type: dynamics.bezier,
+                        duration: 500,
+                        points: [{"x":0,"y":0,"cp":[{"x":0.2,"y":1}]},{"x":1,"y":1,"cp":[{"x":0.3,"y":1}]}],
+                        delay: (itemstotal-pos-1)*40
+                    };
+                }
+            }
+        });
+    })();
+
+
+</script>
+
+</html>
