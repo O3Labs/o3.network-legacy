@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "1336781023.network.o3.wallet.ios",
+                "paths": [ "*" ]
+            }
+        ]
+    }
+}
