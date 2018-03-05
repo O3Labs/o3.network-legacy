@@ -1,0 +1,68 @@
+{
+	"nep5tokens": [
+		{
+		"tokenHash": "132947096727c84c7f9e076c90f08fec3bc17f18",
+		"name": "THEKEY Token",
+		"symbol": "TKY",
+		"decimal": 8,
+		"totalSupply": 9795844687
+	},
+		{
+		"tokenHash": "ceab719b8baa2310f232ee0d277c061704541cfb",
+		"name": "Ontology Token",
+		"symbol": "ONT",
+		"decimal": 8,
+		"totalSupply": 1000000000
+	},
+		{
+		"tokenHash": "34579e4614ac1a7bd295372d3de8621770c76cdc",
+		"name": "Concierge Token",
+		"symbol": "CGE",
+		"decimal": 8,
+		"totalSupply": 55000000
+	},
+		 {
+		"tokenHash": "7f86d61ff377f1b12e589a5907152b57e2ad9a7a",
+		"name": "ACAT Token",
+		"symbol": "ACAT",
+		"decimal": 8,
+		"totalSupply": 6250000000
+	},
+		 {
+		"tokenHash": "a721d5893480260bd28ca1f395f2c465d0b5b1c2",
+		"name": "Narrative Token",
+		"symbol": "NRVE",
+		"decimal": 8,
+		"totalSupply": 1000000000
+	},{
+		"tokenHash": "ecc6b20d3ccac1ee9ef109af5a7cdb85706b1df9",
+		"name": "Red Pulse Token",
+		"symbol": "RPX",
+		"decimal": 8,
+		"totalSupply": 1358371250
+	}, {
+		"tokenHash": "b951ecbbc5fe37a9c280a76cb0ce0014827294cf",
+		"name": "DeepBrain Coin",
+		"symbol": "DBC",
+		"decimal": 8,
+		"totalSupply": 9580000000
+	}, {
+		"tokenHash": "0d821bd7b6d53f5c2b40e217c6defc8bbe896cf5",
+		"name": "Qlink Token",
+		"symbol": "QLC",
+		"decimal": 8,
+		"totalSupply": 600000000
+	}, {
+		"tokenHash": "08e8c4400f1af2c20c28e0018f29535eb85d15b6",
+		"name": "Trinity Network Credit",
+		"symbol": "TNC",
+		"decimal": 8,
+		"totalSupply": 1000000000
+	}, {
+		"tokenHash": "ac116d4b8d4ca55e6b6d4ecce2192039b51cccc5",
+		"name": "Zeepin Token",
+		"symbol": "ZPT",
+		"decimal": 8,
+		"totalSupply": 834565044
+	}]
+}
