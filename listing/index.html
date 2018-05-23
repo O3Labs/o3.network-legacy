@@ -18,10 +18,13 @@
     <link href='../css/fonts.css' rel='stylesheet' type='text/css'>
     <link href="../css/paper-kit.css?v=2.1.0" rel="stylesheet"/>
     <style type="text/css">
+    .bg-primary-o3{
+      background-color: #0069d9;
+  }
 </style>
 </head>
 <body >
-  <nav class="navbar navbar-expand-lg fixed-top" color-on-scroll="300">
+  <nav class="navbar navbar-expand-lg fixed-top bg-primary-o3" color-on-scroll="300">
     <div class="container">
        <a class="navbar-brand" href="/">O<sub><small>3</small></sub></a>
 
@@ -43,41 +46,88 @@
 </div>
 </nav>
 
-<div class="wrapper">
+<div class="wrapper" id="app">
     <div class="main">
         <div class="section">
             <div class="container">
-                <div class="row mt-5">
-                  <div class="col-md-6 col-sm-12 mx-auto text-center">
-                    <img src="img/phone.png" width="100%" />
-<a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="../img/playstore.png" height="60px" /></a>
-                     <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="../img/appstore.svg" height="40px" /></a>
-                    
-                  </div>
-                  <div class="col-md-6 col-sm-12 mx-auto">
-                    <h3 class="title-uppercase mb-4">Your token on O<sub>3</sub></h3>
-                    <p class="mb-2">
-                    We love supporting open source projects and NEP-5 tokens in our application. However, listing tokens comes with its own set of challenges. Namely, that we cannot effectively test contracts (tokens) that we have no control over.</p>
-                    <p class="mb-2">
-                    This leads to many support inquiries that take away from our bandwidth, and  are difficult to resolve. With the rapid growth of the NEP-5 economy, this is quickly becoming unsustainable.</p>
+               
 
-                    <p class="mb-2">To that end we are asking all teams that want to see their token on O3 to please contact us, so that we can work together to create a great first experience on the listing. No more “I can’t see my token, what is going on” or “My transfer isn’t going through”</p>
+<div class="row mt-5">
+  <div class="col-md-6 col-sm-12 mx-auto text-center">
+    <img src="img/phone.png" width="100%" />
+    <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="../img/playstore.png" height="60px" /></a>
+    <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="../img/appstore.svg" height="40px" /></a>
 
-                    <p class="mb-2">We will not charge a fee for listing, but there are some basic standards that we’d like to uphold such as the contract being open source. If your favorite project is not on O3, please ask the team responsible for the token to reach out to us.</p>
+</div>
+<div class="col-md-6 col-sm-12 mx-auto">
+    <h3 class="title-uppercase mb-4">Your token on O<sub>3</sub></h3>
+    <p class="mb-2">
+    We love supporting open source projects and NEP-5 tokens in our application. However, listing tokens comes with its own set of challenges. Namely, that we cannot effectively test contracts (tokens) that we have no control over.</p>
+    <p class="mb-2">
+    This leads to many support inquiries that take away from our bandwidth, and  are difficult to resolve. With the rapid growth of the NEP-5 economy, this is quickly becoming unsustainable.</p>
 
-                    <p class="mb-2">All teams or users can reach us with the links below </p>
+    <p class="mb-2">To that end we are asking all teams that want to see their token on O3 to please contact us, so that we can work together to create a great first experience on the listing. No more “I can’t see my token, what is going on” or “My transfer isn’t going through”</p>
+
+    <p class="mb-2">If your favorite project is not on O3, please ask the team responsible for the token to reach out to us.</p>
+
+    <p class="mb-2">All teams or users can reach us with the links below </p>
+</p>
+<a class="btn btn-link" href="mailto:support@o3.network?subject=listtoken">Email us</a>
+</div>
+</div>
+
+
+ <h3 class="title">Supported NEP5</h3>
+                <div class="row my-4">
+                 <div class="col-md-3 col-sm-6" v-for="token in list">
+                  <div class="card no-transition">
+                   <div class="card-body">
+                    <h6 class="card-category">{{token.symbol}}</h6>
+                    <a v-bind:href="token.webURL" target="_blank">
+                     <p class="card-description">
+                      <div class="text-center">
+                        <img v-bind:src="token.logoURL" class="my-4" style="min-height:80px;max-height: 80px">
+                        <h6>{{token.name}}</h6>
+                    </div>
                 </p>
-                <a class="btn btn-link" href="mailto:hello@o3.network?subject=listtoken">Email us</a>
-                
-                <a class="btn btn-link" href="https://discordapp.com/channels/@me/413628795917172747">@apisit on Discord</a>
-                <a class="btn btn-link" href="https://discordapp.com/channels/@me/413628795917172747">@andreit_O3 on Discord</a>
-
-            </div>
+            </a>
         </div>
-    </div>
+
+    </div> 
+</div>
+</div>
+
+
+
+
 </div>
 </div>
 </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+  var app2 = new Vue({
+    el: '#app',
+    data: {
+      url:"https://cdn.o3.network/data/nep5.json",
+      list:[{"name":"test"}]
+  },
+  methods: {
+      loadList(){
+         axios.get(this.url).then(response => {
+            this.list = response.data.nep5tokens;
+        })       
+     }
+ },
+ mounted: function () {
+  this.loadList();
+}
+})
+
+</script>
+
+
 </body>
 </html>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112635659-1"></script><script>window.dataLayer=window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'UA-112635659-1');</script>

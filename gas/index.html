@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>O3 — Request GAS</title>
+	<meta name="description" content="This is Finance 2.0 — Interacting with the blockchain has never been this simple. O3 is a gateway that provides access to the NEO blockchain. You will be able to manage your digital assets in a simple and secure way directly from your mobile device.">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="viewport" content="width=device-width" />
+	<meta property="og:image" content="https://o3.network/img/opengraph.jpg"/>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link href='../css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="../css/paper-kit.css?v=2.1.0" rel="stylesheet"/>
+	<style type="text/css">
+	.bg-primary-o3{
+		background-color: #0069d9;
+	}
+</style>
+</head>
+<body >
+	<nav class="navbar navbar-expand-lg fixed-top bg-primary-o3" color-on-scroll="300">
+		<div class="container">
+			<a class="navbar-brand" href="/">O<sub><small>3</small></sub></a>
+
+			<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+				<span class="navbar-toggler-icon"></span>
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse " id="navbarNavDropdown">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/listing/">Request GAS</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/listing/">List your token on our app</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="mailto:support@o3.network">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="wrapper" id="app">
+		<div class="main">
+			<div class="section">
+				<div class="container">
+
+
+					<div class="row mt-5">
+
+						<div class="col-md-8 col-sm-12 mx-auto">
+							<h3 class="title-uppercase mb-4">Request GAS FROM O<sub>3</sub></h3>
+							<h5 class="mb-4">
+								We notice that a considerable amount of our support emails are about our users not able to send out tokens they have received from Airdrop or somewhere else. Sending tokens using our app requires you to have a fraction of GAS(0.00000001). What we have been doing so far for those users is we manually send them GAS. However, this is difficult to keep track of and making it more systematic would be easier for everyone! So If you hold any of the tokens that O<sub>3</sub> supports but you don't have any GAS to send them out, please fill out the form below and we will send you some GAS.</h5>
+
+								<div class="form-group">
+									<h6>NEO Address <span class="icon-danger">*</span></h6>
+									<input type="text" class="form-control border-input" placeholder="enter valid NEO Address here." v-model="address">
+								</div>
+
+								<div class="form-group">
+									<h6>Email address <span class="icon-danger">*</span></h6>
+									<input type="email" validate class="form-control border-input" placeholder="you@email.com" v-model="email">
+								</div>
+
+								<label class="form-check-label">
+									<input type="checkbox" v-model="trulyNeeeded"  class="form-check-input" name="gdpr" id="gdpr"/>
+									<span>I truly need GAS to send out my tokens</span>
+								</label>
+								<br/><br/>
+
+								<button class="btn btn-info" v-bind:disabled="disabledButton" v-on:click="requestGAS()">Request GAS</button>
+								<div class="alert alert-danger mt-4" role="alert" v-show="errorMessage">{{errorMessage}}</div>
+								<div class="alert alert-success mt-4" v-show="success" role="alert">Success! We will be sending you a small amount of GAS.</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script type="text/javascript">
+			var appFaucet = new Vue({
+				el: '#app',
+				data: {
+					address:"",
+					email:"",
+					trulyNeeeded:false,
+					disabledButton:true,
+					errorMessage:"",
+					success:false,
+				},
+				methods: {
+					checkEnabled() {
+						if (this.address.trim().length == 0) {
+							this.disabledButton = true;
+							return;
+						}
+						if (this.email.trim().length == 0) {
+							this.disabledButton = true;
+							return;
+						}
+						if (this.trulyNeeeded == false) {
+							this.disabledButton = true;
+							return;
+						}
+						this.disabledButton = false;
+					},
+					requestGAS(){
+						this.success = false;
+						this.errorMessage = "";
+						axios.post('http://192.168.0.29:8080/api/v1/requestgas', {
+							address: this.address,
+							email: this.email
+						})
+						.then(function (response) {
+							this.email = "";
+							this.address = "";
+							this.trulyNeeeded = false;
+							this.success = true;
+						}.bind(this))
+						.catch(function (e) {
+							this.success = false;
+							this.errorMessage = e.response.data.error.message;
+						}.bind(this));
+					}
+				}, 
+				watch:{
+					address(val){
+						this.checkEnabled();	
+					},
+					email(val){
+						this.checkEnabled();	
+					},
+					trulyNeeeded(val){
+						this.checkEnabled();	
+					}
+				}
+			})
+		</script>
+	</body>
+	</html>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112635659-1"></script><script>window.dataLayer=window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'UA-112635659-1');</script>
