@@ -28,6 +28,12 @@
       .card img{
         border-radius: 0;
       }
+
+      .scrollable-menu {
+        height: auto;
+        max-height: 200px;
+        overflow-x: hidden;
+      }
     </style>
 </head>
 <body >
@@ -68,9 +74,9 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{nep9.query.asset && nep9.query.asset.toUpperCase()}}
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#" v-for="asset in assets" v-on:click="selectAsset">{{asset.symbol.toUpperCase()}}</a>
-                        </div>
+                        <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
+                          <li v-for="asset in assets"><a class="dropdown-item" href="#" v-on:click="selectAsset">{{asset.symbol.toUpperCase()}}</a></li>
+                        </ul>
                     </div>
                </div>
                <div class="form-group">
