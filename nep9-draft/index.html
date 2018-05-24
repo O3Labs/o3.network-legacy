@@ -23,11 +23,12 @@
     <link href="../css/nucleo-icons.css" rel="stylesheet">
 
     <script src="js/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style type="text/css">
-    .card img{
+      .card img{
         border-radius: 0;
-    }
-</style>
+      }
+    </style>
 </head>
 <body >
     <nav class="navbar navbar-expand-lg fixed-top" color-on-scroll="300">
@@ -63,20 +64,18 @@
                 </div>
                 <div class="form-group">
                     <h6>ASSET <span class="icon-danger">*</span></h6>
-
-                    <ul class="nav nav-pills nav-pills-info">
-                       <li class="nav-item">
-                           <a class="nav-link active" data-toggle="pill" href="" role="tab" v-on:click="selectAsset('neo')">NEO</a>
-                       </li>
-
-                       <li class="nav-item">
-                           <a class="nav-link" data-toggle="pill" href="" role="tab" v-on:click="selectAsset('gas')">GAS</a>
-                       </li>
-                   </ul>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{nep9.query.asset && nep9.query.asset.toUpperCase()}}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" v-for="asset in assets" v-on:click="selectAsset">{{asset.symbol.toUpperCase()}}</a>
+                        </div>
+                    </div>
                </div>
                <div class="form-group">
                 <h6>Amount</h6>
-                <input type="number" min="0.1" class="form-control border-input" v-model="nep9.query.amount"/>
+                <input type="number" min="0.1" class="form-control border-input" placeholder="0.01" v-model="nep9.query.amount"/>
             </div>
             <div class="form-group">
                 <h6>Description</h6>
@@ -94,8 +93,6 @@
                  <p class="card-description">{{generatedURI}}</p>
              </div>
          </div>
-
-
      </div>
  </div>
 </div>
@@ -106,7 +103,8 @@
 
 <script src="js/qrcode.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-    CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+
+CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
   if (w < 2 * r) r = w / 2;
   if (h < 2 * r) r = h / 2;
   this.beginPath();
@@ -118,86 +116,145 @@
   this.closePath();
   return this;
 }
- var app = new Vue({
+
+var searchParams = new URLSearchParams(window.location.search);
+var initialNep9 = {};
+var protocol = searchParams.get('protocol');
+if (protocol && protocol.toLowerCase() === 'neo') {
+  initialNep9.address = searchParams.get('address').toLowerCase();
+  initialNep9.asset = searchParams.get('asset').toLowerCase();
+  initialNep9.amount = searchParams.get('amount').toLowerCase();
+  initialNep9.description = searchParams.get('description').toLowerCase();
+}
+
+var initAssets = [
+  {
+    logoSVG: 'img/neo.svg',
+    tokenHash: 'neo',
+    symbol: 'neo',
+  },
+  {
+    logoSVG: 'img/gas.svg',
+    tokenHash: 'gas',
+    symbol: 'gas',
+  },
+];
+
+var app = new Vue({
   el: '#app',
   data: {
-    gasID:"602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7",
-    neoID:"c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
-    generatedURI:"",
-    nep9:{
-        scheme:"neo",
-        address:"AKcm7eABuW1Pjb5HsTwiq7iARSatim9tQ6",
-        query:{
-            assetID:"c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
-            amount:0.0,
-            description:null,
-        }
+    gasID: "602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7",
+    neoID: "c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
+    generatedURI: "",
+    nep9: {
+      scheme: "neo",
+      address: initialNep9.address || "AKcm7eABuW1Pjb5HsTwiq7iARSatim9tQ6",
+      query: {
+        asset: null,
+        amount: initialNep9.amount || null,
+        description: initialNep9.description || null,
+      },
     },
-},
-watch: {
-        nep9: {
-            handler(val){
-                this.constructURI();    
-            },
-            deep:true,
-        }
-    },
-    methods: {
-        drawLogo() {
-            var canvas = document.getElementById('qr-canvas'),
-            context = canvas.getContext('2d')
-            var qrImage = document.getElementById('qrcode').querySelector("img");
-            var img = new Image();
-            img.onload = function() {
-                context.drawImage(qrImage,0,0);
-                context.roundRect(70, 70, 60, 60,5);
-                context.fillStyle = 'white';
-                context.fill();
-                context.drawImage(img, 80, 80,40,40);
-            }
-            img.src = "img/neo.svg";
-        },
-        generateQR(text) {
-            var qrSpan = document.getElementById("qrcode");
-            qrSpan.innerHTML ="";
-            var qrcode = new QRCode("qrcode", {
-                text: text,
-                width: 200,
-                height: 200,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            }); 
-
-            this.drawLogo();
-        },
-        constructURI(){
-            var queryKeys = Object.keys(this.nep9.query)
-            var queryValues = Object.values(this.nep9.query)
-            var query = [];
-            for (var i in queryKeys) {
-                var key = queryKeys[i];
-                var value = queryValues[i];
-                if (value != null) {
-                    query.push(key + "=" + encodeURIComponent(value))
-                }
-            }
-            this.generatedURI = this.nep9.scheme +":" + this.nep9.address + "?" + query.join("&");
-            this.generateQR(this.generatedURI);
-        },
-        selectAsset(v) {
-            if (v=="neo") {
-                this.nep9.query.assetID = this.neoID;
-            }else {
-                this.nep9.query.assetID = this.gasID;
-            }
-            this.constructURI();
-        }
-    },
-    mounted() {
+    assets: initAssets,
+  },
+  watch: {
+    nep9: {
+      handler(val){
         this.constructURI();
-    }
-})
+      },
+      deep:true,
+    },
+    assets: {
+      handler(val){
+        this.constructURI();
+      },
+    },
+  },
+  methods: {
+    drawLogo() {
+      var canvas = document.getElementById('qr-canvas'),
+      context = canvas.getContext('2d')
+      var qrImage = document.getElementById('qrcode').querySelector("img");
+      var img = new Image();
+      img.onload = function() {
+        context.drawImage(qrImage,0,0);
+        context.roundRect(70, 70, 60, 60,5);
+        context.fillStyle = 'white';
+        context.fill();
+        context.drawImage(img, 80, 80,40,40);
+      }
+      img.src = this.assets.reduce((result, token) => {
+        if (this.nep9.query.asset === token.symbol.toLowerCase()) {
+          result = token.logoSVG;
+        }
+        return result;
+      }, "img/neo.svg");
+    },
+    generateQR(text) {
+      var qrSpan = document.getElementById("qrcode");
+      qrSpan.innerHTML ="";
+      var qrcode = new QRCode("qrcode", {
+        text: text,
+        width: 200,
+        height: 200,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+
+      this.drawLogo();
+    },
+    constructURI(){
+      var query = Object.keys(this.nep9.query).reduce((result, key) => {
+        var value = this.nep9.query[key];
+        if (value) {
+          if (key === 'asset') {
+            value = this.mapTokenSymbolToHash(value);
+          }
+          result.push(key + "=" + encodeURIComponent(value))
+        }
+        return result;
+      }, []);
+
+      var newURI = this.nep9.scheme +":" + this.nep9.address;
+      if (query.length > 0) {
+        newURI += "?" + query.join("&");
+      }
+      this.generatedURI = newURI;
+      this.generateQR(this.generatedURI);
+    },
+    mapTokenSymbolToHash(symbol) {
+      return this.assets.reduce((result, token) => {
+        if (token.symbol.toLowerCase() === symbol) {
+          result = token.tokenHash;
+        }
+        return result;
+      }, symbol);;
+    },
+    selectAsset(event) {
+      this.nep9.query.asset = event.target.text.toLowerCase();
+      this.constructURI();
+    },
+    loadList(){
+      axios.get('https://cdn.o3.network/data/nep5.json').then(response => {
+        this.assets = [...initAssets, ...response.data.nep5tokens];
+        if (initialNep9 && initialNep9.asset) {
+          this.nep9.query.asset = this.assets.reduce((result, token) => {
+            if (token.tokenHash === initialNep9.asset) {
+              return token.symbol.toLowerCase();
+            }
+            return result;
+          }, initialNep9.asset);
+        } else {
+          this.nep9.query.asset = 'neo';
+        }
+      })
+    },
+  },
+  mounted() {
+    this.loadList();
+  },
+});
 
 </script>
 <!-- Core JS Files -->
