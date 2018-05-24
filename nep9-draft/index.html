@@ -121,10 +121,10 @@ var searchParams = new URLSearchParams(window.location.search);
 var initialNep9 = {};
 var protocol = searchParams.get('protocol');
 if (protocol && protocol.toLowerCase() === 'neo') {
-  initialNep9.address = searchParams.get('address').toLowerCase();
-  initialNep9.asset = searchParams.get('asset').toLowerCase();
-  initialNep9.amount = searchParams.get('amount').toLowerCase();
-  initialNep9.description = searchParams.get('description').toLowerCase();
+  initialNep9.address = searchParams.get('address');
+  initialNep9.asset = searchParams.get('asset') && searchParams.get('asset').toLowerCase();
+  initialNep9.amount = searchParams.get('amount');
+  initialNep9.description = searchParams.get('description');
 }
 
 var initAssets = [
