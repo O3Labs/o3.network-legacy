@@ -24,9 +24,10 @@
 
     <script src="js/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/neo-qrcode@0.0.7/build/neoqr.min.js"></script>
     <style type="text/css">
-      .card img{
-        border-radius: 0;
+      .card {
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 6px 10px 4px;
       }
 
       .scrollable-menu {
@@ -34,53 +35,93 @@
         max-height: 200px;
         overflow-x: hidden;
       }
+
+      .qr-code-img-url-container {
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .what-is-nep-9 {
+        position: absolute;
+        top: 20px;
+        right: 100px;
+      }
     </style>
 </head>
-<body >
-    <nav class="navbar navbar-expand-lg fixed-top" color-on-scroll="300">
-        <div class="container">
-         <a class="navbar-brand" href="/">O<sub><small>3</small></sub></a>
+<body>
 
-         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="mailto:hello@o3.network">Contact</a>
-                </li>
-            </ul>
-        </div>
+<!-- Nav header -->
+<nav class="navbar navbar-expand-lg fixed-top" color-on-scroll="300">
+<div class="container">
+    <a class="navbar-brand" href="/">O<sub><small>3</small></sub></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="mailto:hello@o3.network">Contact</a>
+            </li>
+        </ul>
     </div>
+</div>
 </nav>
 
+
 <div class="wrapper mt-4" id="app">
-    <div class="section">
-        <div class="container">
-           <div class="row">
-            <div class="col-md-12"> <h3>NEP9 QR Code Generator</h3></div>
+<div class="section">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          <p>
+            <a class="float-right" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <h3>What is NEP9?</h3>
+            </a>
+          </p>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <h6>NEO Address <span class="icon-danger">*</span></h6>
-                    <input type="text" class="form-control border-input" placeholder="enter valid NEO Address here." v-model="nep9.address">
+    </div>
+    <div class="collapse" id="collapseExample">
+        <div  class="text-right">
+          <p>
+            NEP 9, or NEO Enhancement Proposal 9, describes a standardized URI scheme for communicating the transfer
+            of native asset and token transfers on the NEO blockchain.
+            This standardized format for communicating the intent to create a transaction is standardized things like
+            links and QR codes across differrent applications in the ecosystem can effectively interface with one another.
+          </p>
+          <br>
+          <p>
+            Please review the full proposal for more details.
+          </p>
+          <a href="https://github.com/neo-project/proposals/blob/master/nep-9.mediawiki">https://github.com/neo-project/proposals/blob/master/nep-9.mediawiki</a>
+          <br>
+        </div>
+    </div>
+
+    <!-- QR code generator -->
+    <div class="row">
+        <div class="col-md-12"> <h2>NEP9 QR Code Generator</h2></div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="form-group">
+                <h6>NEO Address <span class="icon-danger">*</span></h6>
+                <input type="text" class="form-control border-input" placeholder="enter valid NEO Address here." v-model="nep9.address">
+            </div>
+            <div class="form-group">
+                <h6>ASSET <span class="icon-danger">*</span></h6>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{nep9.query.asset && nep9.query.asset.toUpperCase()}}
+                    </button>
+                    <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
+                        <li v-for="asset in assets"><a class="dropdown-item" href="#" v-on:click="selectAsset">{{asset.symbol.toUpperCase()}}</a></li>
+                    </ul>
                 </div>
-                <div class="form-group">
-                    <h6>ASSET <span class="icon-danger">*</span></h6>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{nep9.query.asset && nep9.query.asset.toUpperCase()}}
-                        </button>
-                        <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="dropdownMenuButton">
-                          <li v-for="asset in assets"><a class="dropdown-item" href="#" v-on:click="selectAsset">{{asset.symbol.toUpperCase()}}</a></li>
-                        </ul>
-                    </div>
-               </div>
-               <div class="form-group">
-                <h6>Amount</h6>
+            </div>
+            <div class="form-group">
+            <h6>Amount</h6>
                 <input type="number" min="0.1" class="form-control border-input" placeholder="0.01" v-model="nep9.query.amount"/>
             </div>
             <div class="form-group">
@@ -88,59 +129,213 @@
                 <textarea class="form-control textarea-limited" placeholder="Description" rows="3" maxlength="50" v-model="nep9.query.description"></textarea>
                 <h5><small><span id="textarea-limited-message" class="pull-right" >50 characters left</span></small></h5>
             </div>
-            <button class="btn btn-outline-primary btn-block btn-round" v-on:click="constructURI()">Generate</button>
+            <button class="btn btn-outline-primary btn-block btn-round" v-on:click="generateQRCode()">Generate</button>
         </div>
         <div class="col-md-4 my-auto" >
-           <div class="card no-transition">
-             <div class="card-body">
-                 <h6 class="card-category">NEP9 Compatible QR Code</h6>
-                 <canvas  class="my-4" id="qr-canvas" width="200" height="200"></canvas>
-                 <div id="qrcode" style="display: none;"></div>
-                 <p class="card-description">{{generatedURI}}</p>
-             </div>
-         </div>
-     </div>
- </div>
+            <div class="card no-transition">
+                <div class="card-body">
+                    <h6 class="card-category">NEP9 Compatible QR Code</h6>
+                    <img id="qrcode-container"></img>
+                    <h6 class="card-category">QR Code Image URL</h6>
+                    <div class="input-group mb-3 qr-code-img-url-container">
+                      <input type="text" class="form-control" id="qr-code-img-url" v-model="imageUrl" readonly>
+                      <div class="input-group-append">
+                        <button class="btn" type="button" v-on:click="copyUrl('qr-code-img-url')">Copy</button>
+                      </div>
+                    </div>
+                    <h6 class="card-category">NEP9 URI</h6>
+                    <p class="card-description">{{generatedURI}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Image service -->
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+          <h2>NEP9 QR Code Image Service</h2>
+          <br>
+          <p class="lead">
+              A hosted dynamic PNG image service for generating NEO NEP9 compliant QR codes.
+          </p>
+          <br>
+          <p>
+            The image service url format is exact to the NEP9 standard, and replaces the neo: prefix with https://nep9.o3.network/. You can provide any combination of address and parameters to the service, and it will return a PNG image resource back to you.
+          </p>
+          <br>
+          <p>
+            This service is meant to be used wherever any of the available packages are not able to be run, or you would like to easily share these QR codes over chat of social media.
+          </p>
+          <br>
+          <h5>For example, the image url for the above QR code is:</h5>
+          <div class="input-group mb-3 qr-code-img-url-container">
+            <input type="text" class="form-control" id="qr-code-img-url" v-model="imageUrl" readonly>
+            <div class="input-group-append">
+              <button class="btn" type="button" v-on:click="copyUrl('qr-code-img-url')">Copy</button>
+            </div>
+          </div>
+          <br>
+          <h5>HTML IMG tag:</h5>
+          <div class="input-group mb-3 qr-code-img-url-container">
+            <input type="text" class="form-control" id="qr-code-img-html" v-model="sampleImage" readonly>
+            <div class="input-group-append">
+              <button class="btn" type="button" v-on:click="copyUrl('qr-code-img-html')">Copy</button>
+            </div>
+          </div>
+          <br>
+          <h5>Markdown:</h5>
+          <div class="input-group mb-3 qr-code-img-url-container">
+            <input type="text" class="form-control" id="qr-code-img-markdown" v-model="sampleMarkdown" readonly>
+            <div class="input-group-append">
+              <button class="btn" type="button" v-on:click="copyUrl('qr-code-img-markdown')">Copy</button>
+            </div>
+          </div>
+      </div>
+    </div>
+
+
+    <!-- npm package -->
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+          <h2>Javascript/Typescript Library</h2>
+          <br>
+          <p class="lead">
+              For generating and attach NEP9 compliant QR codes in your JS app.
+          </p>
+          <br>
+          <p>
+            The package can be delivered via CDN, or installed via NPM and included in apps using your favorite bundle management tool.
+          </p>
+          <br>
+          <p>
+            Please review the package for more details.
+          </p>
+          <a href="https://badge.fury.io/js/neo-qrcode"><img src="https://badge.fury.io/js/neo-qrcode.svg" alt="npm version" height="18"></a>
+          <br>
+      </div>
+    </div>
+
+
+    <!-- nep9js -->
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+          <h2>nep9.js</h2>
+          <br>
+          <p class="lead">
+              A simple library for attaching NEP9 compliant QR codes to your page using html data attributes.
+          </p>
+          <br>
+          <p>
+            Please review the repo for more details.
+          </p>
+          <a href="https://github.com/O3Labs/nep9.js">https://github.com/O3Labs/nep9.js</a>
+          <br>
+      </div>
+    </div>
+
+
 </div>
 </div>
 </div>
+
+
+
+<footer class="footer footer-black footer-big">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2 text-center col-sm-3 col-12 ml-auto mr-auto">
+        <h4>O3 Labs Inc.</h4>
+      </div>
+      <div class="col-md-9 col-sm-9 col-12 ml-auto mr-auto">
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-6">
+            <div class="links">
+              <ul class="uppercase-links stacked-links">
+                <li>
+                  <a href="/">
+                    Home
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-3 col-6">
+            <div class="links">
+              <ul class="uppercase-links stacked-links">
+                <li>
+                  <a href="mailto:support@o3.network?subject=contacts">
+                   Support
+                 </a>
+               </li>
+               <li>
+                  <a href="https://community.o3.network">
+                   Community
+                 </a>
+               </li>
+               <li>
+                <a href="https://neonewstoday.com/" target="_blank">
+                  NEO News Today
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-6">
+          <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="../img/appstore.svg" height="40px" style="margin-left: 10px;" /></a>
+          <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="../img/playstore.png" width="155px" /></a>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row copyright ">
+
+        <div class="col text-left px-0">
+          © <script>document.write(new Date().getFullYear())</script> O3 Labs Inc.
+        </div>
+        <div class="col links px-0 text-right">
+          <ul>
+            <li>
+              <a href="/privacy">
+                Terms
+              </a>
+            </li>
+            |
+            <li>
+              <a href="/privacy">
+                Privacy
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</footer>
 
 </body>
 
-<script src="js/qrcode.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 
-CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
-  if (w < 2 * r) r = w / 2;
-  if (h < 2 * r) r = h / 2;
-  this.beginPath();
-  this.moveTo(x+r, y);
-  this.arcTo(x+w, y,   x+w, y+h, r);
-  this.arcTo(x+w, y+h, x,   y+h, r);
-  this.arcTo(x,   y+h, x,   y,   r);
-  this.arcTo(x,   y,   x+w, y,   r);
-  this.closePath();
-  return this;
+// Check for an initial uri in the url hash
+var hashValue = window.location.hash;
+var nep9Uri = hashValue && hashValue.replace('#', '');
+if (!nep9Uri.startsWith('neo:')) {
+  nep9Uri = `neo:${nep9Uri}`;
 }
-
-var searchParams = new URLSearchParams(window.location.search);
-var initialNep9 = {};
-var protocol = searchParams.get('protocol');
-if (protocol && protocol.toLowerCase() === 'neo') {
-  initialNep9.address = searchParams.get('address');
-  initialNep9.asset = searchParams.get('asset') && searchParams.get('asset').toLowerCase();
-  initialNep9.amount = searchParams.get('amount');
-  initialNep9.description = searchParams.get('description');
-}
+var initialNep9 = nep9Uri && NeoQR.parseUri(nep9Uri);
 
 var initAssets = [
   {
-    logoSVG: 'img/neo.svg',
     tokenHash: 'neo',
     symbol: 'neo',
   },
   {
-    logoSVG: 'img/gas.svg',
     tokenHash: 'gas',
     symbol: 'gas',
   },
@@ -149,12 +344,12 @@ var initAssets = [
 var app = new Vue({
   el: '#app',
   data: {
-    gasID: "602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7",
-    neoID: "c56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
     generatedURI: "",
+    imageUrl: "",
+    sampleImage: "",
+    sampleMarkdown: "",
     nep9: {
-      scheme: "neo",
-      address: initialNep9.address || "AKcm7eABuW1Pjb5HsTwiq7iARSatim9tQ6",
+      address: initialNep9.address || "AR8rRBxgWw5siKsp1dUmfTLy6QQTjcqoqB",
       query: {
         asset: null,
         amount: initialNep9.amount || null,
@@ -166,68 +361,35 @@ var app = new Vue({
   watch: {
     nep9: {
       handler(val){
-        this.constructURI();
+        this.generateQRCode();
       },
       deep:true,
     },
     assets: {
       handler(val){
-        this.constructURI();
+        this.generateQRCode();
       },
     },
   },
   methods: {
-    drawLogo() {
-      var canvas = document.getElementById('qr-canvas'),
-      context = canvas.getContext('2d')
-      var qrImage = document.getElementById('qrcode').querySelector("img");
-      var img = new Image();
-      img.onload = function() {
-        context.drawImage(qrImage,0,0);
-        context.roundRect(70, 70, 60, 60,5);
-        context.fillStyle = 'white';
-        context.fill();
-        context.drawImage(img, 80, 80,40,40);
-      }
-      img.src = this.assets.reduce((result, token) => {
-        if (this.nep9.query.asset === token.symbol.toLowerCase()) {
-          result = token.logoSVG;
-        }
-        return result;
-      }, "img/neo.svg");
+    copyUrl(elId) {
+      var inputEl = document.getElementById(elId);
+      inputEl.select();
+      document.execCommand('copy');
     },
-    generateQR(text) {
-      var qrSpan = document.getElementById("qrcode");
-      qrSpan.innerHTML ="";
-      var qrcode = new QRCode("qrcode", {
-        text: text,
-        width: 200,
-        height: 200,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-      });
-
-      this.drawLogo();
-    },
-    constructURI(){
-      var query = Object.keys(this.nep9.query).reduce((result, key) => {
-        var value = this.nep9.query[key];
-        if (value) {
-          if (key === 'asset') {
-            value = this.mapTokenSymbolToHash(value);
-          }
-          result.push(key + "=" + encodeURIComponent(value))
-        }
-        return result;
-      }, []);
-
-      var newURI = this.nep9.scheme +":" + this.nep9.address;
-      if (query.length > 0) {
-        newURI += "?" + query.join("&");
-      }
-      this.generatedURI = newURI;
-      this.generateQR(this.generatedURI);
+    generateQRCode(){
+      var qrCodeEl = document.getElementById('qrcode-container');
+      var options = {
+        address: this.nep9.address,
+        asset: this.mapTokenSymbolToHash(this.nep9.query.asset),
+        amount: this.nep9.query.amount,
+        description: this.nep9.query.description
+      };
+      var qrCode = new NeoQR({nep9Data: options, imgEl: qrCodeEl, width: 300});
+      this.generatedURI = qrCode.uri;
+      this.imageUrl = qrCode.uri.replace('neo:', 'https://nep9.o3.network/');
+      this.sampleImage = `<img src="${this.imageUrl}" />`;
+      this.sampleMarkdown = `![img](${this.imageUrl})`;
     },
     mapTokenSymbolToHash(symbol) {
       return this.assets.reduce((result, token) => {
@@ -239,7 +401,7 @@ var app = new Vue({
     },
     selectAsset(event) {
       this.nep9.query.asset = event.target.text.toLowerCase();
-      this.constructURI();
+      this.generateQRCode();
     },
     loadList(){
       axios.get('https://cdn.o3.network/data/nep5.json').then(response => {
