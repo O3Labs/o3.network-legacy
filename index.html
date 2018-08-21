@@ -444,7 +444,47 @@
     width: 70px;
   }
 
+  .platforms {
+    display: flex;
+    justify-content: center;
+  }
 
+  .platform-container {
+    padding: 0 25px;
+  }
+
+  .direct-download-btn {
+    background-color: black;
+    border:1px solid grey;
+    padding: 4px 16px;
+    border-radius: 6px;
+    width: 272px;
+  }
+
+  .app-store-btn {
+    height: 40px;
+    margin-bottom: 6px;
+  }
+
+  @media only screen and (max-width : 767px) {
+    .platforms {
+      flex-direction: column-reverse;
+    }
+
+    .page-header.page-header-small {
+      min-height: 85vh !important;
+    }
+  }
+
+  @media only screen and (max-width : 767px) and (max-height : 700px) {
+    .page-header.page-header-small {
+      min-height: 100vh !important;
+    }
+
+    .platform-container {
+      padding: 0;
+    }
+  }
 </style>
 </head>
 <body class="presentation-page loading">
@@ -487,13 +527,54 @@
       <div class="container">
         <div class="motto">
           <h1 class="title"><img src="img/logo-white.png" srcset="img/logo-white@2x.png 2x" height="90px" /></h1>
-          <h3 class="description">Your Mobile Gateway to the NEO Smart Economy</h3>
-          <br />
-          <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="img/appstore.svg" height="40px" /></a>
-          <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="img/playstore.png" height="60px" /></a>
-          <p>or</p>
-          <p><a href="/files/app-release-1.7.2.apk" class="btn btn-sm btn-default mb-2" style="background-color: black;border:1px solid grey;">Download .apk file for Android (1.7.2)</a></p>
-          <p>If you are using O3 via TestFlight, Please read our migration guide <a href="/migrate/" class="">here</a></p>
+          <h3 class="description">Your gateway to the Smart Economy</h3>
+        </div>
+        <div class="platforms">
+          <div class="platform-container">
+            <h4 class="description">Desktop</h4>
+            <br />
+            <a href="https://itunes.apple.com/us/app/o3/id1421086700" target="_blank"><img src="img/appstore.svg" class="app-store-btn" /></a>
+            <a href="https://www.microsoft.com/store/apps/9P6FJT4FB4DJ" target="_blank"><img src="img/winstore.png" class="app-store-btn" style="border:1px solid grey;padding: 0px 5.71px;background-color: black;border-radius: 5px;"/></a>
+            <p>
+              <a
+                href="/files/app-release-1.7.2.apk"
+                class="btn btn-sm btn-default direct-download-btn"
+              >
+                OSX Direct Download
+              </a>
+            </p>
+            <p>
+              <a
+                href="/files/app-release-1.7.2.apk"
+                class="btn btn-sm btn-default direct-download-btn"
+              >
+                Windows Direct Download
+              </a>
+            </p>
+            <p>
+              <a
+                href="/files/app-release-1.7.2.apk"
+                class="btn btn-sm btn-default direct-download-btn"
+              >
+                Linux Direct Download
+              </a>
+            </p>
+          </div>
+
+          <div class="platform-container">
+            <h4 class="description">Mobile</h4>
+            <br />
+            <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="img/appstore.svg" class="app-store-btn" /></a>
+            <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="img/playstore.png" class="app-store-btn" /></a>
+            <p>
+              <a
+                href="/files/app-release-1.7.2.apk"
+                class="btn btn-sm btn-default direct-download-btn"
+              >
+                Download .apk file for Android
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -630,7 +711,7 @@
     </div>
   </div> <!-- end section-features -->
 
-  
+
   <div class="section section-partners">
     <div class="container">
       <div class="row">
@@ -685,8 +766,14 @@
           </div>
         </div>
         <div class="col-md-3 col-sm-3 col-6">
-          <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="img/appstore.svg" height="40px" style="margin-left: 10px;" /></a>
-          <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="img/playstore.png" width="155px" /></a>
+          <h6>Mobile</h6>
+          <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="img/appstore.svg" class="app-store-btn" /></a>
+          <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="img/playstore.png" class="app-store-btn" /></a>
+        </div>
+        <div class="col-md-3 col-sm-3 col-6">
+          <h6>Desktop</h6>
+          <a href="https://itunes.apple.com/us/app/o3/id1421086700" target="_blank"><img src="img/appstore.svg" class="app-store-btn" /></a>
+          <a href="https://www.microsoft.com/store/apps/9P6FJT4FB4DJ" target="_blank"><img src="img/winstore.png" class="app-store-btn" style="border:1px solid grey;padding: 0px 5.71px;background-color: black;border-radius: 5px;"/></a>
         </div>
       </div>
       <hr>
