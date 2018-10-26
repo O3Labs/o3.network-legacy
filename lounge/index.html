@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" >
+<head>
+	<title>O3 lounge</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="assets/css/front.css">
+	<style type="text/css">
+	* {
+		font-family: "Avenir", Helvetica, Arial, sans-serif;
+	}
+	.o3-primary {
+		background-color: #218fff;
+	}
+</style>
+</head>
+<body >
+	<section id="app">
+		<div class="position-relative o3-primary mb-9">
+			<div class="u-bg-img-hero-bottom">
+				<div class="container u-space-1-top u-space-3-top--md u-space-1-top--lg">
+					<div class="w-md-80 w-lg-70 text-center mx-auto mb-9">
+						<img src="https://cdn.o3.network/logo/logo-dark.png" srcset="https://cdn.o3.network/logo/logo-dark@2x.png 2x" class="mt-5" />
+						<h1 class="display-4 font-size-48--md-down text-white"><strong class="font-weight-bold">Lounge</strong></h1>
+						<p class="lead u-text-light">Get access to O3 lounge to internet hang out with the team. A ringside seat of our developments. Test awesome new features before anyone else. Real-time support*</p>
+						<p class="u-text-light">PS. other way to support the team <a href="https://society6.com/o3_store" target="_blank" class="u-text-light"><u>Buy our official swag</u></a></p>
+
+					</div>
+					<main class="container z-index-2">
+						<div class="row mb-5">
+							<div class="col">
+
+								<div class="u-pricing-v2 transition-3d-hover shadow">
+									
+									<header class="u-pricing-v2__header">
+										<h2 class="h6 text-primary mb-3">Supporter</h2>
+										<span class="d-block">
+											<span class="display-4 text-dark font-weight-normal">
+												<span class="align-top font-size-26"></span>1
+											</span>
+											<span class="d-block text-secondary font-size-14">GAS</span>
+										</span>
+									</header>
+									
+									<div class="u-pricing-v2__content">
+										<ul class="list-unstyled mb-4">
+											<li class="u-pricing-v2__list-item py-2">🛋 Lounge access</li>
+											<li class="u-pricing-v2__list-item py-2">👍 Remote thumbs up</li>
+										</ul>
+
+										<a href="#form" v-on:click="selectAmount(1)" class="btn btn-sm btn-block u-btn-primary--air u-btn-primary transition-3d-hover">Request access</a>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col">
+
+								<div class="u-pricing-v2 transition-3d-hover shadow">
+									<header class="u-pricing-v2__header">
+										<h2 class="h6 text-primary mb-3">Fan</h2>
+										<span class="d-block">
+											<span class="display-4 text-dark font-weight-normal">
+												<span class="align-top font-size-26"></span>10
+											</span>
+											<span class="d-block text-secondary font-size-14">GAS</span>
+										</span>
+									</header>
+
+									<div class="u-pricing-v2__content">
+										<ul class="list-unstyled mb-4">
+											<li class="u-pricing-v2__list-item py-2">🛋 Lounge access</li>
+											<li class="u-pricing-v2__list-item py-2">👍 Remote thumbs up</li>
+											<li class="u-pricing-v2__list-item py-2">👋 Virtual high five</li>
+											<li class="u-pricing-v2__list-item py-2">🤗 Internet group hug</li>
+										</ul>
+
+										<a href="#form" v-on:click="selectAmount(10)" class="btn btn-sm btn-block u-btn-primary--air u-btn-primary transition-3d-hover">Request access</a>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="col" >
+
+								<div class="u-pricing-v2 transition-3d-hover shadow active">
+									<header class="u-pricing-v2__header">
+										<h2 class="h6 text-primary mb-3">🐳</h2>
+										<span class="d-block">
+											<img v-bind:src="nep9url()" width="100%" class="mb-3" />
+											<div class="form-group text-left">
+												<label class="h6 small d-block text-muted">Choose your own amount</label>
+												<div class="input-group mb-3">
+													<input type="text" class="form-control" placeholder="100" v-model="gasAmount"  />
+													<div class="input-group-append">
+														<span class="input-group-text" id="basic-addon2">GAS</span>
+													</div>
+												</div>
+											</div>
+										</span>
+										<a href="#form" v-on:click="selectAmount(gasAmount)" class="btn btn-sm btn-block u-btn-primary--air u-btn-primary transition-3d-hover">Request access</a>
+									</header>
+								</div>
+
+							</div>
+						</div>
+					</main>
+
+				</div>
+			</div>
+
+			<!-- SVG Bottom Shape -->
+			<figure class="position-absolute-bottom-0">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+				viewBox="0 0 1921 273" style="enable-background:new 0 0 1921 273;" xml:space="preserve">
+				<polygon class="u-fill-white" points="0,273 1921,273 1921,0 "/>
+			</svg>
+		</figure>
+		<!-- End SVG Bottom Shape -->
+	</div>
+</div>
+
+<div class="row mb-6">
+	<div class="col text-center">
+		<small class="text-muted">Leave the lounge anytime, no string attached.</small><br/>
+		<small class="text-muted">* We are in Japan and also sleep like everybody else</small>
+	</div>
+</div>
+
+<form action="https://sendyyyy.o3.network/subscribe" method="POST" accept-charset="utf-8">
+	<a name="form"></a>
+	<div class="container w-lg-60 mx-auto mb-9">
+		<div class="row">
+			<div class="col">
+				<div class="js-form-message mb-4">
+					<label class="h6 small d-block text-uppercase">Email address</label>
+
+					<div class="js-focus-state input-group u-form">
+						<input type="email" class="form-control u-form__input" id="email" name="email" required
+						placeholder="whaleycool@o3.network"
+						aria-label="whaleycool@o3.network"
+						data-msg="Please enter a valid email address."
+						data-error-class="u-has-error"
+						data-success-class="u-has-success">
+					</div>
+				</div>
+				<div class="js-form-message mb-4">
+					<label class="h6 small d-block text-uppercase">Discord username</label>
+					<div class="js-focus-state input-group u-form">
+						<input type="text" class="form-control u-form__input" id="discord" name="discord" required
+						placeholder="discord_joe"
+						aria-label="discord_joe"
+						data-error-class="u-has-error"
+						data-success-class="u-has-success">
+					</div>
+				</div>
+
+				<div class="js-form-message mb-4">
+					<label class="h6 small d-block text-uppercase">Wallet address</label>
+					<div class="js-focus-state input-group u-form">
+						<input type="text" class="form-control u-form__input" id="wallet" name="wallet" required
+						placeholder="Abc..."
+						aria-label="discord_joe"
+						data-error-class="u-has-error"
+						data-success-class="u-has-success">
+					</div>
+				</div>
+
+				<div class="js-form-message mb-4">
+					<label class="h6 small d-block text-uppercase">GAS Amount</label>
+					<div class="js-focus-state input-group u-form">
+						<input type="text" class="form-control u-form__input" v-model="selectedAmount" id="amount" name="amount" required
+						placeholder="1"
+						data-error-class="u-has-error"
+						data-success-class="u-has-success">
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col">
+
+				<div style="display:none;">
+					<label for="hp">HP</label><br/>
+					<input type="text" name="hp" id="hp"/>
+				</div>
+				<input type="hidden" name="list" value="n9KXTi892vF6SrAFTbv9892nTw"/>
+				<input type="hidden" name="subform" value="yes"/>
+				<button type="submit" id="submit" class="btn btn-primary u-btn-primary transition-3d-hover">Request access</button>
+			</div>
+		</div>
+	</div>
+</form>
+</section>
+
+<script type="text/javascript">
+	var app = new Vue({
+		el: '#app',
+		data: {
+			gasAmount: 200,
+			selectedAmount:1
+		},
+		methods:{
+			selectAmount(amount){
+				this.selectedAmount = amount;
+			},
+			nep9url(){
+				return "https://nep9.o3.network/AKzUziiiv9vHj8hX3bYQFVUktk36u6C5w3?asset=gas&amount=" + this.gasAmount;
+			}
+		}
+	})
+
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-112635659-1"></script><script>window.dataLayer=window.dataLayer || []; function gtag(){dataLayer.push(arguments);}gtag('js', new Date()); gtag('config', 'UA-112635659-1');</script>
+</body>
+</html>
