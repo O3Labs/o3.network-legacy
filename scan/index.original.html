@@ -183,14 +183,14 @@
 				return "https://cdn.o3.network/img/neo/" + symbol.toUpperCase() + ".png";
 			},
 			getBalances(address){
-				axios.get("https://d1kot8exyu9nt1.cloudfront.net/neo/"+this.address + "/balances",{ crossdomain: true }).then(response => {
+				axios.get("https://d1kot8exyu9nt1.cloudfront.net/neo/"+this.address + "/balances").then(response => {
 					this.data = response.data.result.data;
 				}).catch(e => {
 					console.log(e);
 				})
 			},
 			getSwitcheoBalances(address){
-				axios.get("https://d1kot8exyu9nt1.cloudfront.net/trading/"+this.address,{ crossdomain: true }).then(response => {
+				axios.get("https://d1kot8exyu9nt1.cloudfront.net/trading/"+this.address).then(response => {
 					this.trading = response.data.result.data.switcheo.confirmed;
 				}).catch(e => {
 					console.log(e);
@@ -200,12 +200,15 @@
 				if (this.address.trim().length == 0 || this.address.trim().length != 34) {
 					return;
 				}
+				window.location.hash = this.address;
 				this.getBalances(this.address);
 				this.getSwitcheoBalances(this.address);
 			}
 		},
 		mounted() {
-
+			var hash = window.location.hash;
+			this.address = hash.replace("#","")
+			this.checkBalances()
 		}
 	});
 </script>
