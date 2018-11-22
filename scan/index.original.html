@@ -3,6 +3,7 @@
 <head>
 	<title>Check NEO, GAS, NEP5, Ontology and Switcheo Smart contract balances</title>
 	<link rel="shortcut icon" href="favicon.ico">
+	<meta name="apple-itunes-app" content="app-id=1336781023"/>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css">
@@ -76,7 +77,7 @@
 		<div class="col col-md-6 mx-auto">
 			<h6>Check address's balances</h6>
 			<div class="input-group mb-3">
-				<input type="text" class="form-control" placeholder="NEO or Ontology address" aria-label="NEO address" aria-describedby="basic-addon2" v-model="address"/>
+				<input type="text" class="form-control" placeholder="NEO, Ontology address or NNS name" aria-label="NEO address" aria-describedby="basic-addon2" v-model="address" v-on:keyup.enter="checkBalances"/>
 				<div class="input-group-append">
 					<button class="btn btn-primary btn-o3-primary" type="button" v-on:click="checkBalances">Check</button>
 				</div>
@@ -165,7 +166,7 @@
 		</div>
 	</div>
 </main>
-
+<script src="https://unpkg.com/@cityofzion/neon-js" ></script>
 <script type="text/javascript">
 	var app = new Vue({
 		el: '#app',
@@ -196,8 +197,30 @@
 					console.log(e);
 				})
 			},
+			resolveNNS(domain){
+				axios.get("https://d1kot8exyu9nt1.cloudfront.net/neo/nns/"+domain.toLowerCase()).then(response => {
+					if (response.data.error != null) {
+						return;
+					}
+					var address =  response.data.result.data.address;
+					this.address = address;
+					this.checkBalances();
+				}).catch(e => {
+					// console.log(e);
+				})
+			},
 			checkBalances(){
+				var isNNS = this.address.endsWith(".neo") && this.address.trim().length > 1;
+				if (isNNS) {
+					//resole nns
+					this.resolveNNS(this.address);
+					return
+				}
 				if (this.address.trim().length == 0 || this.address.trim().length != 34) {
+					return;
+				}
+				var isAddress = Neon.wallet.isAddress(this.address);
+				if (isAddress == false) {
 					return;
 				}
 				window.location.hash = this.address;
@@ -207,7 +230,12 @@
 		},
 		mounted() {
 			var hash = window.location.hash;
-			this.address = hash.replace("#","")
+			var address = hash.replace("#","")
+			var isAddress = Neon.wallet.isAddress(address);
+			if (isAddress == false) {
+				return;
+			}
+			this.address = address;
 			this.checkBalances()
 		}
 	});

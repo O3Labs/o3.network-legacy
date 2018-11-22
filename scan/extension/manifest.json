@@ -1,0 +1,22 @@
+
+{
+  "manifest_version": 2,
+
+  "name": "Bag inspector",
+  "description": "Check NEO/ONT address balances on O3 Explorer",
+  "version": "0.1",
+
+  "browser_action": {
+    
+  },
+  "permissions": ["tabs", "https://*/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "css": ["style.css"],
+      "js": ["main.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+]
+} 

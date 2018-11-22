@@ -1,0 +1,18 @@
+.wtc_tooltip {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #218fff;
+  color:#fff;
+  padding: 10px;
+  font-weight: 700;
+  border-radius: 6px;
+  font-family: Helvetica;
+  font-size: 16px;
+  line-height: 16px;
+  z-index: 99999;
+}
+.wtc_tooltip a {
+  color:#fff;
+}
