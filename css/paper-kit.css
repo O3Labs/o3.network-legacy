@@ -2345,7 +2345,7 @@ textarea.form-control {
   cursor: pointer;
 }
 .navbar .navbar-toggler .navbar-toggler-bar {
-  background: #66615b;
+  background: #aaaaaa;
 }
 .navbar[class*="bg-"] .navbar-toggler .navbar-toggler-bar, .navbar.navbar-transparent .navbar-toggler .navbar-toggler-bar {
   background: #fff;
@@ -2371,7 +2371,7 @@ textarea.form-control {
   height: 2px;
   border-radius: 1px;
   margin: 0 auto;
-  background: gray;
+  background: #d0d0d0;
 }
 
 .no-transition {
