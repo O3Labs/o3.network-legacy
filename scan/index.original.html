@@ -24,6 +24,7 @@
 	.o3-text-primary{
 		color:#218fff;	
 	}
+
 	[v-cloak] {
 		display: none;
 	}
@@ -82,7 +83,6 @@
 					<button class="btn btn-primary btn-o3-primary" type="button" v-on:click="checkBalances">Check</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
@@ -158,8 +158,12 @@
 			</div>
 		</div>
 	</div>
-
-
+	<div class="row mt-5">
+		<div class="col col-md-6 mx-auto alert alert-warning">
+		<h6>NEO Blockchain Queued Transaction Count: {{ mempoolHeight }}</h6>
+		<p>⚠️ If the queued transactions is over 500, there maybe delays when receiving funds in your wallet.</p>
+	</div>
+	</div>
 	<div class="row">
 		<div class="col text-center">
 			<button class="btn btn-link o3-text-primary">O3 Labs, Inc.</button>
@@ -174,6 +178,8 @@
 			address:"",
 			data:{},
 			trading:{},
+			nodes:{},
+			mempoolHeight: 0
 		}, 
 		methods:{
 			formatValue(token){
@@ -186,6 +192,20 @@
 			getBalances(address){
 				axios.get("https://d1kot8exyu9nt1.cloudfront.net/neo/"+this.address + "/balances").then(response => {
 					this.data = response.data.result.data;
+				}).catch(e => {
+					console.log(e);
+				})
+			},
+			getMempoolHeight(){
+				axios.get("https://platform.o3.network/api/v1/nodes").then(response => {
+					this.nodes = response.data.result.data;
+					console.log(this.nodes)
+					axios.get(this.nodes.neo.best + "?jsonrpc=2.0&method=getrawmempool&params=[]&id=1").then(response => {
+						this.mempoolHeight = response.data.result.length;
+						console.log(this.mempool)
+						}).catch(e => {
+							console.log(e);
+						})
 				}).catch(e => {
 					console.log(e);
 				})
@@ -237,6 +257,7 @@
 			}
 			this.address = address;
 			this.checkBalances()
+			this.getMempoolHeight()
 		}
 	});
 </script>
