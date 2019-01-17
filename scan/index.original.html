@@ -161,10 +161,10 @@
 	</div>
 	<div class="row mt-5" v-cloak>
 		<div class="col col-md-6 mx-auto alert alert-warning">
-		<h6>NEO Blockchain Queued Transaction Count: {{ mempoolHeight }}</h6>
-		<p>⚠️ If the queued transactions is over 500, there maybe delays when receiving funds in your wallet.</p>
-		<p>Consider adding a fee to your next transaction to guarantee speed</p>
-	</div>
+			<h6>NEO Blockchain Queued Transaction Count: {{ mempoolHeight }}</h6>
+			<p>⚠️ If the queued transactions is over 500, there maybe delays when receiving funds in your wallet.</p>
+			<p>Consider adding a fee to your next transaction to guarantee speed</p>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col text-center">
@@ -179,7 +179,6 @@
 			address:"",
 			data:{},
 			trading:{},
-			nodes:{},
 			mempoolHeight: 0
 		}, 
 		methods:{
@@ -198,16 +197,12 @@
 				})
 			},
 			getMempoolHeight(){
-				axios.get("https://platform.o3.network/api/v1/nodes").then(response => {
-					this.nodes = response.data.result.data;
-					axios.get(this.nodes.neo.best + "?jsonrpc=2.0&method=getrawmempool&params=[]&id=1").then(response => {
-						this.mempoolHeight = response.data.result.length;
-						}).catch(e => {
-							console.log(e);
-						})
+				axios.get("https://d1kot8exyu9nt1.cloudfront.net/neo/mempool").then(response => {
+					this.mempoolHeight = response.data.result.length;
 				}).catch(e => {
 					console.log(e);
 				})
+				
 			},
 			getSwitcheoBalances(address){
 				axios.get("https://d1kot8exyu9nt1.cloudfront.net/trading/"+this.address).then(response => {
