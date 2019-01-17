@@ -158,7 +158,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row mt-5">
+	<div class="row mt-5" v-cloak>
 		<div class="col col-md-6 mx-auto alert alert-warning">
 		<h6>NEO Blockchain Queued Transaction Count: {{ mempoolHeight }}</h6>
 		<p>⚠️ If the queued transactions is over 500, there maybe delays when receiving funds in your wallet.</p>
@@ -167,11 +167,11 @@
 	</div>
 	<div class="row">
 		<div class="col text-center">
-			<button class="btn btn-link o3-text-primary">O3 Labs, Inc.</button>
+			<a class="btn btn-link o3-text-primary" href="https://o3.network">O3 Labs, Inc.</a>
 		</div>
 	</div>
 </main>
-<script src="https://unpkg.com/@cityofzion/neon-js" ></script>
+<script src="https://unpkg.com/@cityofzion/neon-js" async></script>
 <script type="text/javascript">
 	var app = new Vue({
 		el: '#app',
