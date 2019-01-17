@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css">
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/@cityofzion/neon-js"></script>
 	<link rel="stylesheet" href="assets/css/front.css">
 	<style type="text/css">
 	* {
@@ -171,7 +172,6 @@
 		</div>
 	</div>
 </main>
-<script src="https://unpkg.com/@cityofzion/neon-js" async></script>
 <script type="text/javascript">
 	var app = new Vue({
 		el: '#app',
@@ -200,10 +200,8 @@
 			getMempoolHeight(){
 				axios.get("https://platform.o3.network/api/v1/nodes").then(response => {
 					this.nodes = response.data.result.data;
-					console.log(this.nodes)
 					axios.get(this.nodes.neo.best + "?jsonrpc=2.0&method=getrawmempool&params=[]&id=1").then(response => {
 						this.mempoolHeight = response.data.result.length;
-						console.log(this.mempool)
 						}).catch(e => {
 							console.log(e);
 						})
@@ -250,6 +248,7 @@
 			}
 		},
 		mounted() {
+			this.getMempoolHeight();
 			var hash = window.location.hash;
 			var address = hash.replace("#","")
 			var isAddress = Neon.wallet.isAddress(address);
@@ -258,7 +257,7 @@
 			}
 			this.address = address;
 			this.checkBalances()
-			this.getMempoolHeight()
+			
 		}
 	});
 </script>
