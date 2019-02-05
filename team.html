@@ -318,7 +318,7 @@
   }
 
   .isolayer {
-    transform: translateX(34vw) translateY(-285px) rotateX(50deg) rotateZ(30deg) !important;
+    transform: translateX(34vw) translateY(-330px) rotateX(50deg) rotateZ(30deg) !important;
     z-index: 1;
   }
 
@@ -492,8 +492,9 @@ font-size: 2.5em;
 margin-bottom: 10px;
   }
 
-  .feature-icon {
-    height: 75px;
+  .member-name {
+margin-top: -10px;
+
   }
 
   .btn-orange {
@@ -538,11 +539,13 @@ margin-bottom: 10px;
   margin-bottom: -50px;
   overflow:visible;
 }
+
 .section-darkgray {
   background-color: #2D2D2D;
   color: #7C7C7C;
   padding-left: 20px;
   padding-right: 20px;
+
   overflow:visible;
 }
 
@@ -551,14 +554,7 @@ overflow: visible;
 width: 100%;
 margin-bottom:-100px;
 position: relative;
-z-index: 5;
 }
-
-.clear {
- clear: both;
- margin-top: 125px;
-}
-
 
   @media only screen and (max-width : 767px) {
     .platforms {
@@ -566,393 +562,192 @@ z-index: 5;
     }
 
     .page-header.page-header-small {
-      min-height: 100vh !important;
+      min-height: 85vh !important;
     }
-
   }
-
-  
 
   @media only screen and (max-width : 767px) and (max-height : 700px) {
     .page-header.page-header-small {
-      min-height: 140vh !important;
+      min-height: 100vh !important;
     }
 
-
+    .platform-container {
+      padding: 0;
+      margin-top: 220px;
+    }
 
   }
 </style>
 </head>
-<body class="presentation-page loading">
-  <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="20">
+<body class="presentation-page loading ">
+<div class="section section-blue">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="0" >
     <div class="container">
-     <a class="navbar-brand" href="#">O3 Labs</a>
+     <a class="navbar-brand" href="index.html">O3 Labs</a>
 
      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
       <span class="navbar-toggler-icon"></span>
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse " id="navbarNavDropdown">
-      <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-              <a class="nav-link" href="#developers">For Developers</a>
-           </li>
-        <li class="nav-item">
-            <a class="nav-link" href="team.html">Meet the team</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://community.o3.network">Community</a>
-        </li>
-         <!--<li class="nav-item">
-            <a class="nav-link" href="https://o3.network/scan">O3 Scan</a>
-        </li>-->
-     <!--  <li class="nav-item">
-          <a  class="nav-link" href="https://neonewstoday.com/" target="_blank">
-            Latest NEO News
-          </a>
-        </li>--> 
-       <li class="nav-item">
-          <a class="nav-link" href="mailto:support@o3.network">Contact</a>
-        </li>
-        <li class="nav-item">
-            <a href="https://buy.o3.network"> <p class="btn-green" style="height: 30px; width:140px; margin-top:20px; padding-top:5px; font-size: 1em; text-align: center;">Buy NEO Today</p></a>
-          </li>
-      </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html#developers">For Developers</a>
+             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="team.html"  style="opacity: .4;">Meet the team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://community.o3.network">Community</a>
+            </li>
+          <!--   <li class="nav-item">
+                <a class="nav-link" href="https://o3.network/scan">O3 Scan</a>
+            </li>-->
+         <!--  <li class="nav-item">
+              <a  class="nav-link" href="https://neonewstoday.com/" target="_blank">
+                Latest NEO News
+              </a>
+            </li>--> 
+            <li class="nav-item">
+              <a class="nav-link" href="mailto:support@o3.network">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a href="https://buy.o3.network"> <p class="btn-green" style="height: 30px; margin-top:20px; padding-top:5px; font-size: 1em;">Buy NEO Today</p></a>
+              </li>
+          </ul>
     </div>
   </div>
 </nav>
-
-<div class="wrapper">
-  <div class="page-header page-header-small" style="	background: radial-gradient(circle, #45C2FF 0%, #218FFF 100%);">
-    <!-- <div class="filter"></div> -->
-    <div id="particles-js"></div>
-
-    <div class="content-center">
-        <div class="clear"></div>
-      <div class="container">
-        <div class="motto">
-          <h1 class="title"><img src="img/logo-white.png" srcset="img/logo-white@2x.png 2x" height="90px" /></h1>
-          <h4 style="margin-top:-20px; margin-bottom:20px;" class="description">Your gateway to the Smart Economy</h4>
-        </div>
-        <div class="platforms">
-          <div class="platform-container">
-        
-              <img src="img/platform_desktop.png" class="platform-icon" />
-            <h4 class="description">Desktop</h4>
-            <br />
-            <a href="https://itunes.apple.com/us/app/o3/id1421086700" target="_blank"><img src="img/macos_store.png" class="app-store-btn" /></a>
-            <a href="https://www.microsoft.com/store/apps/9P6FJT4FB4DJ" target="_blank"><img src="img/win10_store.png" class="app-store-btn" /></a>
-            <p>
-
-            </p>
-          </div>
-
-          <div class="platform-container">
-              <img src="img/platform_mobile.png" class="platform-icon" />
-            <h4 class="description">Mobile</h4>
-            <br />
-            <a href="https://itunes.apple.com/app/id1336781023" target="_blank"><img src="img/ios_store.png" class="app-store-btn" /></a>
-            <a href="https://play.google.com/store/apps/details?id=network.o3.o3wallet" target="_blank"><img src="img/google_store.png" class="app-store-btn" /></a>
-
-          </div>
-
-        </div>
-          <br />
-        <h4 class="description"> Direct Downloads:</h4>
-<br />
-
-            <a
-              href="files/O3-Setup-1-2-0-OSX.dmg"
-              class="direct-download-btn"
-              onclick="gtag('event', 'o3-desktop-download-osx', {'event_category': 'link', 'event_label': 'o3-desktop-download-osx'});"
-            >
-              Mac OSX
-            </a>
-
-            <a
-              href="files/O3-Setup-1-2-0-WIN.exe"
-              class="direct-download-btn"
-              onclick="gtag('event', 'o3-desktop-download-win', {'event_category': 'link', 'event_label': 'o3-desktop-download-win'});"
-            >
-              Windows
-            </a>
-
-            <a
-              href="files/O3-Setup-1-2-0-LINUX.AppImage"
-              class="direct-download-btn"
-              onclick="gtag('event', 'o3-desktop-download-linux', {'event_category': 'link', 'event_label': 'o3-desktop-download-linux'});"
-            >
-              Linux
-            </a>
-
-
-             <a href="/files/app-latest.apk" class="direct-download-btn"
-             onclick="gtag('event', 'o3-apk-download-android', {'event_category': 'link', 'event_label': 'o3-apk-download-android'});">
-             Android (.APK)
-             </a>
-             <div class="clear"></div>
-      </div>
-    </div>
-  </div>
 </div>
 
-<div class="wrapper">
-
-  <div class="section section-cards section-gray">
-    <div class="codrops-header">
-      <div class="row">
-        <div class="col-md-6 col-lg-4">
-          <div class="section-description">
-            <h3 class="title-major">Take Control of Your Assets</h3>
-            <h6 class="category">MANAGE, LEARN, TRADE, CONNECT</h6>
-            <h5 class="description">Be empowered by a user friendly cryptocurrency light wallet that puts you in charge.
-              <br /> <br />
-              Built for the <a href="https://neo.org/">NEO</a> and <a href="https://ont.io/">Ontology</a> blockchains, O3 is your gateway to the Smart Economy of the future.</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <section class="section-intro ">
-      <div class="isolayer isolayer--deco1 isolayer--shadow ">
-        <ul class="grid">
-          <li class="grid__item first-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/android-news.jpg" alt="Android Withdraw" />
-            </a>
-          </li>
-          <li class="grid__item second-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/android-port.jpg" alt="02" />
-            </a>
-          </li>
-          <li class="grid__item third-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/ios-send.jpg" alt="Send Asset" />
-            </a>
-          </li>
-          <li class="grid__item fourth-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/android-assets.jpg" alt="Account on Android" />
-            </a>
-          </li>
-          <li class="grid__item fifth-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/ios-1.png" alt="iOS Account" />
-            </a>
-          </li>
-          <li class="grid__item sixth-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/ios-touchid.jpg" alt="Security on iOS" />
-            </a>
-          </li>
-          <!--<li class="grid__item seventh-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/android-unclaimed-gas.gif" alt="unclaimed gas" />
-            </a>
-          </li>-->
-          <li class="grid__item eight-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/store.jpg" alt="My NEO Address" />
-            </a>
-          </li>
-          <li class="grid__item ninth-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/marketplace.jpg" alt="Watch only address" />
-            </a>
-          </li>
-          <li class="grid__item tenth-card">
-            <a class="grid__link">
-              <img class="grid__img layer" src="img/cards/ios-transactions.jpg" alt="Transaction History" />
-            </a>
-          </li>
-        </ul>
-      </div> <!-- end isolayer -->
-    </section><!--/intro-->
-  </div> <!-- end section-cards -->
 
   <div class="section section-features-1">
     <div class="container">
       <div class="row">
         <div class="col-md-8 ml-auto mr-auto text-center">
-            <h3 class="title-major">Open a world of possibilites</h3>
-          <p class="description">With O3, you can access a whole ecosystem of assets, apps, news, & communities.</p>
+            <h3 class="title-major">Meet the team</h3>
+          <p class="description">The O3 team is made up of super talented people from all over the world. Based out of Tokyo, we all have a strong, driving passion to make awesome technology that people love. </p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-              <img class="feature-icon" src="img/feature_icons/ic_assets.png"><img>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Your assets in one place</h4>
-              <p class="description">Manage all your NEO, Ontology, GAS, ONG, NEP-5 and OEP-8 in a simple, user friendly interface that supports multiple wallets. </p>
-            </div>
+        <!-- Team Member Item-->
+        <div class="col-md-4">
+          <div class="info ml-auto mr-auto">
+                <img class="" src="img/team/tm_placeholder.png" width="200px;"><img>
+              </div>
+              <div class="description text-center">
+                <h4 class="info-title member-name">Apisit Toompakdee</h4>
+                <p class="description">Co-Founder</p>
+              </div>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-                <img class="feature-icon" src="img/feature_icons/ic_apps.png"><img>
+      
+        <!-- End Team Member Item-->
+
+       <!-- Team Member Item-->
+                <div class="col-md-4">
+                    <div class="info ml-auto mr-auto">
+                          <img class="" src="img/team/tm_placeholder.png" width="200px;"><img>
+                        </div>
+                        <div class="description text-center">
+                          <h4 class="info-title member-name">Andrei Terentiev</h4>
+                          <p class="description">Co-Founder</p>
+                        </div>
+                    </div>
+           
+       <!-- End Team Member Item-->
+
+     <!-- Team Member Item-->
+        <div class="col-md-4">
+            <div class="info ml-auto mr-auto">
+                  <img class="" src="img/team/tm_placeholder.png" width="200px;"><img>
+                </div>
+                <div class="description text-center">
+                  <h4 class="info-title member-name">Arco Oliemans</h4>
+                  <p class="description">Business Developement</p>
+                </div>
             </div>
-            <div class="description">
-              <h4 class="info-title">Awesome apps</h4>
-              <p>O3’s application platform allows users to  connect with awesome apps without having to share sensative data, like Private Keys with third parties.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-                <img class="feature-icon" src="img/feature_icons/ic_news.png"><img>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Stay in the loop</h4>
-              <p>Get the latest NEO & Ontology news, and token details, so that you are always up to date with the ecosystem & latest projects.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="info">
-            <div class="icon icon-danger">
-                <img class="feature-icon" src="img/feature_icons/ic_trade.png"><img>
-            </div>
-            <div class="description">
-              <h4 class="info-title">Make deals</h4>
-              <p>Depositing, withdrawing and trading your favourite tokens has never been easier or safer, with full integration with Switcheo’s DEX trading API. </p>
-            </div>
-          </div>
+  
+          <!-- End Team Member Item-->
         </div>
 
-      </div>
-              <!-- Call To Action -->
-              <div class="row">
-                 <div class="col-md-4 ml-auto mr-auto text-center">
-                <div class="info">
-                  <a href="#">  <p class="btn-orange"><img src="img/ic_download.png" width="18px"></img>&nbsp; Get O3 for Desktop & Mobile</p></a>
-                  <br /><br />
-                  </div>
-               </div>
+       <div class="row">
+
+       <!-- Team Member Item-->
+        <div class="col-md-4">
+            <div class="info ml-auto mr-auto">
+                  <img class="" src="img/team/tm_placeholder.png" width="200px;"><img>
+                </div>
+                <div class="description text-center">
+                  <h4 class="info-title member-name">Nick Fujita</h4>
+                  <p class="description">Developer</p>
+                </div>
+          
+          </div>
+          <!-- End Team Member Item-->
+
+        <!-- Team Member Item-->
+        <div class="col-md-4">
+            <div class="info ml-auto mr-auto">
+                  <img class="" src="img/team/tm_placeholder.png" width="200px;"><img>
+                </div>
+                <div class="description text-center ">
+                  <h4 class="info-title member-name">Alex Knight</h4>
+                  <p class="description">Product Designer</p>
+                </div>
+        
+          </div>
+          <!-- End Team Member Item-->
+
+        <!-- Team Member Item-->
+        <div class="col-md-4">
+            <div class="info ml-auto mr-auto">
+                  <img class="" src="img/team/tm_placeholder.png" width="200px;"><img>
+                </div>
+                <div class="description text-center">
+                  <h4 class="info-title member-name">Luna Oh Three</h4>
+                  <p class="description">Robotic Assistant</p>
+                </div>
+            </div>
+
+             <!-- End Team Member Item-->
+          </div>
+         
+        </div>
+   
+
     </div>
 
-
-    <!--section 2-->
- 
-        <div class="row">
-          <div class="col-md-4">
-            <div class="info">
-              <div class="icon icon-danger">
-                <img class="feature-icon" src="img/feature_icons/ic_onramp.png"><img>
-              </div>
-              <div class="description">
-                <h4 class="info-title">Fiat & Crypto On-ramp</h4>
-                <p class="description">O3 is the first wallet in the NEO/ONT ecosystem that allows users to purchase with fiat via credit card or other popular cryptocurrencies. </p>
-                   <!-- Call To Action -->
-                     <br />         
-                   <a href="https://buy.o3.network"> <p class="btn-green">Buy NEO with Fiat</p></a>
-                   <a href="https://o3.network/swap"> <p class="btn-green">Buy with Crypto</p></a>
-         
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="info">
-              <div class="icon icon-danger">
-                  <img class="feature-icon" src="img/feature_icons/ic_scan.png"><img>
-              </div>
-              <div class="description">
-                <h4 class="info-title">O3 Scan</h4>
-                <p>Always up to date and correct, O3’s custom blockchain explorer is the best way to track your assets across NEO, Ontology 
-                    and various smart contracts.</p>
-                                       <!-- Call To Action -->
-                                       <br />  
-                    <a href="https://o3.network/scan/"> <p class="btn-orange">O3 Scan</p></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="info">
-              <div class="icon icon-danger">
-                  <img class="feature-icon" src="img/feature_icons/ic_community.png"><img>
-              </div>
-              <div class="description">
-                <h4 class="info-title">Hand with O3</h4>
-                <p>Hit up our O3 community or join the VIP Lounge chat on Discord to hang with the team by making a small donation to our project.</p>
-                                   <!-- Call To Action -->
-                                   <br />  
-                <a href="https://community.o3.network/"> <p class="btn-orange">Community</p></a>
-                <a href="https://o3.network/lounge/"> <p class="btn-orange">VIP Lounge</p></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div> <!-- end section-features -->
+<!-- End Team section-->
 
 
-
-<!-- Start Dev CTA -->
-
-
-
-<a id="developers"></a>
+<!-- Start career CTA -->
 
     <div class="section section-blue">
       <div >
         <div class="row ml-auto mr-auto" style="max-width: 1200px;">
-        
-          <div class=" col-sm-10 col-md-6 col-lg-6 ">
+          <div class=" col-sm-10 col-md-6 col-lg-6 ml-auto mr-auto text-center ">
             
-              <h3 class="title-major"> Want to build something with O3?</h3>
+              <h3 class="title-major">Want to work with us?</h3>
       
               <h5>
-                  Are you a developer, working on a cool app or project that could benefit from integrating with a leading wallet and it’s 10,000s of users?
-                <br /><br />
-                  Give us a shout and let’s chat!
+                  We are always on the lookout for excellent talent to join our team and help build the future of the Smart Economy. <br /><br /> If that sounds like you, send us an email and we can chat!
               </h5> 
               <br /><br />
-              <div style="max-width: 350px;">
-              <a href="mailto:dev@o3.network?subject=Interest in O3 dAPI"> <p class="btn-orange text-center" style="margin-left: 0%;"><i class="fas fa-envelope"></i>&nbsp; Get in touch</p></a>
-              <a href="https://docs.o3.network"> <p class="btn-orange text-center" style="margin-left: 0%;">dAPI Documentation</p></a>
+              <div class="ml-auto mr-auto" style="max-width: 350px;">
+              <a href="mailto:support@o3.network?subject=Careers at O3"> <p class="btn-orange text-center" style="margin-left: 0%;"> <i class="fas fa-envelope"></i> &nbsp;Get in touch</p></a>
             </div>
+            <br />
               <br />
             </div>
-          <div class="col-sm-10 col-md-6 col-lg-6" >
-            <img class="img-luna" src="img/luna_rocket.png"><img>
-            </div>
+
         </div>
       </div>
   
-    </div> <!-- end section-cards -->
-  
+    </div> 
+    <!-- end section-cards -->
 
-
-
-
-<!-- end Dev CTA -->
-
-
-  <div class="section section-partners">
-    <div class="container">
-      <div class="row">
-       <div class="col-12 text-center">
-        <h4 class="title-major">Partners</h4>
-        <button class="btn btn-link"><a href="https://neo.org/" alt="NEO Smart Economy" target="_blank"><img src="img/NEO-smarg-economy-logo.svg" height="40px" /></a></button>
-          <button class="btn btn-link"><a href="https://ont.io/" alt="Ontology Foundation" target="_blank"><img src="img/partners/Ontology.png" height="40px" /></a></button>
-          <button class="btn btn-link"><a href="https://twitter.com/NewEconoLab" alt="New Econo Labs" target="_blank"><img src="img/partners/nel.png" height="60px" /></a></button>
-          <button class="btn btn-link"><a href="https://neons.name/index_En.html" alt="New Econo Labs" target="_blank"><img src="img/partners/nns.png" height="35px" /></a></button>
-          <br />
-
-          <button class="btn btn-link"><a href="https://neonewstoday.com/" alt="NEO News Today" target="_blank"><img src="img/partners/nnt.png" height="40px" /></a></button>
-          <button class="btn btn-link"><a href="https://neoeconomy.io/" alt="NEO Economy" target="_blank"><img src="img/partners/neoeconomy.png" height="40px" /></a></button>
-          <button class="btn btn-link"><a href="http://switcheo.exchange/" alt="NEO Economy" target="_blank"><img src="img/partners/switcheo.png" height="40px" /></a></button>
-      </div>
-    </div>
-  </div>
-</div> <!-- section-partners -->
+<!-- end career CTA -->
 
 
 <!-- O3 is open source-->
