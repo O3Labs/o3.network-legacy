@@ -15,7 +15,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6, p, .navbar, .brand, a, .td
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: "Montserrat", "Helvetica", Arial, sans-serif;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
@@ -31,14 +31,15 @@ h2, .h2 {
 }
 
 h3, .h3 {
-  font-size: 1.825em;
+  font-size: 1.6em;
   line-height: 1.4;
-  margin: 20px 0 0px;
+  margin: 0px 0 0px;
 }
 
 h4, .h4 {
-  font-size: 1.6em;
-  line-height: 1.2em;
+  font-size: 1.2em;
+  line-height: 1.6em;
+  font-weight: 600;
 }
 
 h5, .h5 {
@@ -51,6 +52,7 @@ h6, .h6 {
   font-weight: 600;
   text-transform: uppercase;
   line-height: 1.5em;
+  color: #F5A623;
 }
 
 p {
@@ -1777,6 +1779,8 @@ textarea.form-control {
   background-color: #EEEEEE;
 }
 
+
+
 .section-nude {
   background-color: #FFFCF5;
 }
@@ -2022,7 +2026,7 @@ textarea.form-control {
 .navbar .navbar-brand {
   font-weight: 600;
   margin: 5px 0px;
-  padding: 20px 15px;
+  padding: 20px 15px; 
   font-size: 14px;
   color: #66615B;
   text-transform: uppercase;
