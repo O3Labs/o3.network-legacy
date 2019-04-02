@@ -205,7 +205,7 @@
 				
 			},
 			getSwitcheoBalances(address){
-				axios.get("https://d1kot8exyu9nt1.cloudfront.net/trading/"+this.address).then(response => {
+				axios.get("https://d1kot8exyu9nt1.cloudfront.net/trading/"+this.address + "?version=3").then(response => {
 					this.trading = response.data.result.data.switcheo.confirmed;
 				}).catch(e => {
 					console.log(e);
